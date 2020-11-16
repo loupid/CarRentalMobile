@@ -3,23 +3,24 @@ package com.example.carrentalmobile;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.carrentalmobile.Model.Cars;
+import com.example.carrentalmobile.Model.AnnoucedCars;
 
 import java.util.List;
 
 public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> {
 
-    List<Cars> carsList;
+    List<AnnoucedCars> annoucedCarsList;
 
 
-    public AdapterList(List<Cars> carsList) {
-        this.carsList = carsList;
+    public AdapterList(List<AnnoucedCars> annoucedCarsList) {
+        this.annoucedCarsList = annoucedCarsList;
     }
 
     @NonNull
@@ -31,16 +32,16 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.carName.setText(carsList.get(position).getCarname());
-        holder.description.setText(carsList.get(position).getDescription());
-        holder.numberPlace.setText(carsList.get(position).getSeatcount());
-        holder.pricePerDay.setText(carsList.get(position).getTypename());
-        holder.location.setText(carsList.get(position).getUsername());
+        holder.carName.setText(annoucedCarsList.get(position).getCarname());
+        holder.description.setText(annoucedCarsList.get(position).getDescription());
+        holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
+        holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
+        holder.location.setText(annoucedCarsList.get(position).getUsername());
     }
 
     @Override
     public int getItemCount() {
-        return carsList.size();
+        return annoucedCarsList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

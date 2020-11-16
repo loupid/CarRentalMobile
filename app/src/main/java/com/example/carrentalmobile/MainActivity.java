@@ -1,22 +1,18 @@
 package com.example.carrentalmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.carrentalmobile.Database.InterfaceServer;
 import com.example.carrentalmobile.Database.RetroFitInstance;
-import com.example.carrentalmobile.Model.Cars;
+import com.example.carrentalmobile.Model.AnnoucedCars;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,17 +35,17 @@ public class MainActivity extends AppCompatActivity {
 
         InterfaceServer serveur = RetroFitInstance.getInstance().create(InterfaceServer.class);
 
-        Call<List<Cars>> call = serveur.getAllCarsListToRent();
+        Call<List<AnnoucedCars>> call = serveur.getAllCarsListToRent();
 
-        call.enqueue(new Callback<List<Cars>>() {
+        call.enqueue(new Callback<List<AnnoucedCars>>() {
             @Override
-            public void onResponse(Call<List<Cars>> call, Response<List<Cars>> response) {
+            public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 adapterList = new AdapterList(response.body());
                 recyclerView.setAdapter(adapterList);
             }
 
             @Override
-            public void onFailure(Call<List<Cars>> call, Throwable t) {
+            public void onFailure(Call<List<AnnoucedCars>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });

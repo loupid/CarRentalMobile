@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Cars implements Parcelable {
+public class AnnoucedCars implements Parcelable {
 
     @SerializedName("username")
     public String username;
@@ -25,7 +25,8 @@ public class Cars implements Parcelable {
     @SerializedName("description")
     public String description;
 
-    public Cars(String username, String brandname, String carname, String seatcount, String typename, String description) {
+
+    public AnnoucedCars(String username, String brandname, String carname, String seatcount, String typename, String description) {
         this.username = username;
         this.brandname = brandname;
         this.carname = carname;
@@ -82,7 +83,7 @@ public class Cars implements Parcelable {
         this.description = description;
     }
 
-    public static Creator<Cars> getCREATOR() {
+    public static Creator<AnnoucedCars> getCREATOR() {
         return CREATOR;
     }
 
@@ -98,7 +99,7 @@ public class Cars implements Parcelable {
                 '}';
     }
 
-    protected Cars(Parcel in) {
+    protected AnnoucedCars(Parcel in) {
         username = in.readString();
         brandname = in.readString();
         carname = in.readString();
@@ -107,15 +108,15 @@ public class Cars implements Parcelable {
         description = in.readString();
     }
 
-    public static final Creator<Cars> CREATOR = new Creator<Cars>() {
+    public static final Creator<AnnoucedCars> CREATOR = new Creator<AnnoucedCars>() {
         @Override
-        public Cars createFromParcel(Parcel in) {
-            return new Cars(in);
+        public AnnoucedCars createFromParcel(Parcel in) {
+            return new AnnoucedCars(in);
         }
 
         @Override
-        public Cars[] newArray(int size) {
-            return new Cars[size];
+        public AnnoucedCars[] newArray(int size) {
+            return new AnnoucedCars[size];
         }
     };
 
