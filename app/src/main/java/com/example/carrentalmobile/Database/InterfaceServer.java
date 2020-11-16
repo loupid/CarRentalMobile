@@ -1,4 +1,6 @@
-package com.example.carrentalmobile;
+package com.example.carrentalmobile.Database;
+
+import com.example.carrentalmobile.Model.Cars;
 
 import java.util.List;
 

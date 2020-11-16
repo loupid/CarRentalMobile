@@ -1,6 +1,4 @@
-package com.example.carrentalmobile;
-
-import java.util.Base64;
+package com.example.carrentalmobile.Database;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
