@@ -25,14 +25,21 @@ public class AnnoucedCars implements Parcelable {
     @SerializedName("description")
     public String description;
 
+    @SerializedName("title")
+    public String title;
 
-    public AnnoucedCars(String username, String brandname, String carname, String seatcount, String typename, String description) {
+    @SerializedName("imgFileName")
+    public String filepath;
+
+    public AnnoucedCars(String username, String brandname, String carname, String seatcount, String typename, String description, String title, String filepath) {
         this.username = username;
         this.brandname = brandname;
         this.carname = carname;
         this.seatcount = seatcount;
         this.typename = typename;
         this.description = description;
+        this.title = title;
+        this.filepath = filepath;
     }
 
     public String getUsername() {
@@ -47,12 +54,28 @@ public class AnnoucedCars implements Parcelable {
         return brandname;
     }
 
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
     public void setBrandname(String brandname) {
         this.brandname = brandname;
     }
 
     public String getCarname() {
         return carname;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setCarname(String carname) {
@@ -96,6 +119,7 @@ public class AnnoucedCars implements Parcelable {
                 ", seatcount='" + seatcount + '\'' +
                 ", typename='" + typename + '\'' +
                 ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 
@@ -106,6 +130,7 @@ public class AnnoucedCars implements Parcelable {
         seatcount = in.readString();
         typename = in.readString();
         description = in.readString();
+        title = in.readString();
     }
 
     public static final Creator<AnnoucedCars> CREATOR = new Creator<AnnoucedCars>() {
@@ -133,5 +158,6 @@ public class AnnoucedCars implements Parcelable {
         dest.writeString(seatcount);
         dest.writeString(typename);
         dest.writeString(description);
+        dest.writeString(title);
     }
 }

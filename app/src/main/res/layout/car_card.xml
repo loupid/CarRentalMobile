@@ -1,75 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#D6D6D6"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:layout_height="150dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/ivCarInfos"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/container_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4FAF4C"
-            android:orientation="vertical"
-            android:padding="20dp">
+    <ImageView
+        android:id="@+id/car_image"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivCarInfos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/surprise_heard_of_a_sony_car" />
 
-            <TextView
-                android:id="@+id/CarName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="#CACACA"
-                android:padding="2dp"
-                android:text="TextView"
-                android:textSize="36sp" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Title of the announce"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toTopOf="@+id/ivCarInfos" />
 
-            <TextView
-                android:id="@+id/Description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="#CACACA"
-                android:padding="2dp"
-                android:text="TextView"
-                android:textSize="36sp" />
+    <TextView
+        android:id="@+id/tvBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Brand"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-            <TextView
-                android:id="@+id/NumberPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="#CACACA"
-                android:padding="2dp"
-                android:text="TextView"
-                android:textSize="36sp" />
+    <TextView
+        android:id="@+id/tvCarName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="CarName"
+        app:layout_constraintStart_toEndOf="@+id/tvBrand"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-            <TextView
-                android:id="@+id/PricePerDay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="#CACACA"
-                android:padding="2dp"
-                android:text="TextView"
-                android:textSize="36sp" />
+    <TextView
+        android:id="@+id/tvSeatCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Seat count"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
 
-            <TextView
-                android:id="@+id/Location"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="#CACACA"
-                android:padding="2dp"
-                android:text="TextView"
-                android:textSize="36sp" />
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Price"
+        app:layout_constraintStart_toEndOf="@+id/tvSeatCount"
+        app:layout_constraintTop_toBottomOf="@+id/tvCarName" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tvTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Town"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

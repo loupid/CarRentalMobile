@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.carrentalmobile.Database.InterfaceServer;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.recyclerview.AdapterList;
 
 import java.util.List;
 
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        InterfaceServer serveur = RetroFitInstance.getInstance().create(InterfaceServer.class);
+        InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
 
-        Call<List<AnnoucedCars>> call = serveur.getAllCarsListToRent();
+        Call<List<AnnoucedCars>> call = server.getAllCarsListToRent();
 
         call.enqueue(new Callback<List<AnnoucedCars>>() {
             @Override

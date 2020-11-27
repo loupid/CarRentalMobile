@@ -1,4 +1,4 @@
-package com.example.carrentalmobile;
+package com.example.carrentalmobile.recyclerview;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.R;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
         holder.location.setText(annoucedCarsList.get(position).getUsername());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
-//        holder.imageViewCar.setImageDrawable(annoucedCarsList.get(position).getFilename());
+//        holder.imageViewCar.setImageDrawable(annoucedCarsList.get(position).getFilepath());
     }
 
     @Override
