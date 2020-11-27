@@ -31,8 +31,7 @@ public class AnnoucedCars implements Parcelable {
     @SerializedName("imgFileName")
     public String filepath;
 
-    public AnnoucedCars(String username, String brandname, String carname, String seatcount, String typename, String description, String title, String filepath) {
-        this.username = username;
+    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String filepath) {
         this.brandname = brandname;
         this.carname = carname;
         this.seatcount = seatcount;

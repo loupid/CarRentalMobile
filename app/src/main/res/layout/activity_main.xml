@@ -15,6 +15,18 @@
         android:text="Voiture à louer"
         android:textSize="36sp" />
 
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecycleView"
         android:layout_width="match_parent"

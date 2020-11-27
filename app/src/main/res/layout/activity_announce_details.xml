@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnnounceDetailsActivity">
+
+    <ImageView
+        android:transitionName="containerTN"
+        android:id="@+id/ivCarInfos"
+        android:layout_width="0dp"
+        android:layout_height="175dp"
+        android:background="@drawable/container_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:transitionName="carTN"
+        android:id="@+id/car_image"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/ivCarInfos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/surprise_heard_of_a_sony_car" />
+
+    <TextView
+        android:transitionName="carTitleTN"
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Title of the announce"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toTopOf="@+id/ivCarInfos" />
+
+    <TextView
+        android:transitionName="carBrandTN"
+        android:id="@+id/tvBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Brand"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:transitionName="carNameTN"
+        android:id="@+id/tvCarName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="CarName"
+        app:layout_constraintStart_toEndOf="@+id/tvBrand"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:transitionName="carSeatCoutTN"
+        android:id="@+id/tvSeatCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Seat count"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
+
+    <TextView
+        android:transitionName="carPriceTN"
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Price"
+        app:layout_constraintStart_toEndOf="@+id/tvSeatCount"
+        app:layout_constraintTop_toBottomOf="@+id/tvCarName" />
+
+    <TextView
+        android:transitionName="carTownTN"
+        android:id="@+id/tvTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Town"
+        app:layout_constraintStart_toEndOf="@+id/car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:lineSpacingExtra="8dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCarInfos" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
