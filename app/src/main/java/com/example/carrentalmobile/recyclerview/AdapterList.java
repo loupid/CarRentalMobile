@@ -3,7 +3,7 @@ package com.example.carrentalmobile;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,10 +33,12 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.carName.setText(annoucedCarsList.get(position).getCarname());
-        holder.description.setText(annoucedCarsList.get(position).getDescription());
+        holder.title.setText(annoucedCarsList.get(position).getTitle());
         holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
         holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
         holder.location.setText(annoucedCarsList.get(position).getUsername());
+        holder.brand.setText(annoucedCarsList.get(position).getBrandname());
+//        holder.imageViewCar.setImageDrawable(annoucedCarsList.get(position).getFilename());
     }
 
     @Override
@@ -45,16 +47,19 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView carName, description, numberPlace, pricePerDay, location;
+        TextView carName, title, numberPlace, pricePerDay, location, brand;
+        ImageView imageViewCar;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            carName = itemView.findViewById(R.id.CarName);
-            description = itemView.findViewById(R.id.Description);
-            numberPlace = itemView.findViewById(R.id.NumberPlace);
-            pricePerDay = itemView.findViewById(R.id.PricePerDay);
-            location = itemView.findViewById(R.id.Location);
+            carName = itemView.findViewById(R.id.tvCarName);
+            title = itemView.findViewById(R.id.tvTitle);
+            numberPlace = itemView.findViewById(R.id.tvSeatCount);
+            pricePerDay = itemView.findViewById(R.id.tvPrice);
+            location = itemView.findViewById(R.id.tvTown);
+            brand = itemView.findViewById(R.id.tvBrand);
+            imageViewCar = itemView.findViewById(R.id.car_image);
         }
     }
 }
