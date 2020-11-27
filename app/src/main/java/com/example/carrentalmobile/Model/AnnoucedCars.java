@@ -31,7 +31,12 @@ public class AnnoucedCars implements Parcelable {
     @SerializedName("imgFileName")
     public String filepath;
 
-    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String filepath) {
+    @SerializedName("available")
+    public boolean available;
+
+
+
+    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String filepath, boolean available) {
         this.brandname = brandname;
         this.carname = carname;
         this.seatcount = seatcount;
@@ -39,6 +44,7 @@ public class AnnoucedCars implements Parcelable {
         this.description = description;
         this.title = title;
         this.filepath = filepath;
+        this.available = available;
     }
 
     public String getUsername() {
@@ -103,6 +109,15 @@ public class AnnoucedCars implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    //todo: check if availbe to be displayed in the announce list
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public static Creator<AnnoucedCars> getCREATOR() {

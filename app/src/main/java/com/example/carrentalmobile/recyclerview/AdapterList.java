@@ -18,9 +18,14 @@ import java.util.List;
 public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> {
 
     List<AnnoucedCars> annoucedCarsList;
+    CarCallback callback;
 
+    public AdapterList(List<AnnoucedCars> annoucedCarsList, CarCallback callback) {
+        this.annoucedCarsList = annoucedCarsList;
+        this.callback = callback;
+    }
 
-    public AdapterList(List<AnnoucedCars> annoucedCarsList) {
+    public void setAnnoucedCarsList(List<AnnoucedCars> annoucedCarsList) {
         this.annoucedCarsList = annoucedCarsList;
     }
 
@@ -48,8 +53,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView carName, title, numberPlace, pricePerDay, location, brand;
-        ImageView imageViewCar;
+        TextView carName, title, numberPlace, pricePerDay, location, brand, description;
+        ImageView imageViewCar, imgContainer;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,7 +65,12 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             pricePerDay = itemView.findViewById(R.id.tvPrice);
             location = itemView.findViewById(R.id.tvTown);
             brand = itemView.findViewById(R.id.tvBrand);
+            description = itemView.findViewById(R.id.tvDescription);
             imageViewCar = itemView.findViewById(R.id.car_image);
+            imgContainer = itemView.findViewById(R.id.ivCarInfos);
+
+
+            itemView.setOnClickListener(v -> callback.onCarItemClick(getAdapterPosition(), imgContainer, imageViewCar, title, brand, carName, pricePerDay, numberPlace, location, description));
         }
     }
 }
