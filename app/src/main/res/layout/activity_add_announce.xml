@@ -15,10 +15,10 @@
             android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btnAddImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
+                    android:text="Ajouter une image"
                     tools:layout_conversion_absoluteHeight="0dp"
                     tools:layout_conversion_absoluteWidth="411dp"
                     tools:layout_editor_absoluteX="0dp"
@@ -28,7 +28,7 @@
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Titre"
                     android:inputType="textPersonName"
@@ -43,7 +43,7 @@
                     android:id="@+id/etBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Marque"
                     android:inputType="textPersonName"
@@ -58,7 +58,7 @@
                     android:id="@+id/etCarName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Modèle"
                     android:inputType="textPersonName"
@@ -73,7 +73,7 @@
                     android:id="@+id/etCateg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Catégorie"
                     android:inputType="textPersonName"
@@ -88,7 +88,7 @@
                     android:id="@+id/etSeatCount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Nombre de siège"
                     android:inputType="textPersonName"
@@ -103,7 +103,7 @@
                     android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:gravity="start|top"
                     android:hint="Description"
@@ -128,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Titre"
                     android:inputType="textPersonName"
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:drawableTint="#673AB7"
+                    android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Titre"
                     android:inputType="textPersonName"
@@ -159,13 +159,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:drawableTint="#ff690f"
                     android:text="TextView" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:drawableTint="#ff690f" />
         </LinearLayout>
 
         <Button
@@ -173,7 +175,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:backgroundTint="#673AB7"
+            android:backgroundTint="#ff690f"
+            android:drawableTint="#ff690f"
             android:padding="20dp"
             android:text="@string/ajouter"
             android:textColor="#FFFFFF"
