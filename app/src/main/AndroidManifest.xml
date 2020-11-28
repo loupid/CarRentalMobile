@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarRentalMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AnnounceDetailsActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.AddAnnounceActivity"></activity>
+        <activity android:name=".Activities.AnnounceDetailsActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,7 +1,6 @@
-package com.example.carrentalmobile;
+package com.example.carrentalmobile.Activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import com.example.carrentalmobile.Database.InterfaceServer;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.R;
 import com.example.carrentalmobile.recyclerview.AdapterList;
 import com.example.carrentalmobile.recyclerview.CarCallback;
 import com.example.carrentalmobile.recyclerview.ItemAnimator;

@@ -1,12 +1,15 @@
-package com.example.carrentalmobile;
+package com.example.carrentalmobile.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.R;
 
 public class AnnounceDetailsActivity extends AppCompatActivity {
 
@@ -30,7 +33,13 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         imageViewCar = findViewById(R.id.car_image);
 
         loadAnnounceData(annoucedCars);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.burger_menu, menu);
+        return true;
     }
 
     private void loadAnnounceData(AnnoucedCars annoucedCars) {

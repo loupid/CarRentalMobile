@@ -2,12 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="À propos"
+        android:id="@+id/menuHome"
+        android:icon="@drawable/ic_outline_home_24"
+        android:title="@string/home"
         app:showAsAction="always" />
     <item
-        android:title="S'inscrire"
+        android:id="@+id/menuAdd"
+        android:icon="@drawable/ic_outline_add_box_24"
+        android:title="Add"
         app:showAsAction="always" />
     <item
-        android:title="Connexion"
+        android:icon="@drawable/ic_outline_person_outline_24"
+        android:title="Profile"
         app:showAsAction="always" />
+
 </menu>
