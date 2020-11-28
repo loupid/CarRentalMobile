@@ -16,10 +16,10 @@ public class AddAnnounceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_announce);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.burger_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.burger_menu, menu);
+//        return true;
+//    }
 }

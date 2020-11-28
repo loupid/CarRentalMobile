@@ -1,9 +1,12 @@
 package com.example.carrentalmobile.Activities;
 
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +23,7 @@ import com.example.carrentalmobile.recyclerview.ItemAnimator;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     RecyclerView recyclerView;
     AdapterList adapterList;
     Button btnAdd, btnDel;
+    MenuItem menuAdd;
+    Context context;
     List<AnnoucedCars> carsList;
     int ctr = 0;
 
@@ -55,10 +61,10 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
         btnAdd.setOnClickListener(v -> addCar());
 
+        context = this;
+
         //todo: replace with a long press button
-        btnDel.setOnClickListener(v -> {
-            removeAnnounce();
-        });
+        btnDel.setOnClickListener(v -> removeAnnounce());
 
         adapterList = new AdapterList(carsList, this);
 
@@ -100,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuAdd.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(context, AddAnnounceActivity.class);
+            startActivityForResult(intent, 11);
+            return false;
+        });
         return true;
     }
 
@@ -108,18 +120,51 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         Intent intent = new Intent(getBaseContext(), AnnounceDetailsActivity.class);
         intent.putExtra("carAnnounce", carsList.get(pos));
 
-        Pair<View, String> p1 = Pair.create((View)imgContainer, "containerTN");
-        Pair<View, String> p2 = Pair.create((View)imgCar, "carTN");
-        Pair<View, String> p3 = Pair.create((View)title, "carTitleTN");
-        Pair<View, String> p4 = Pair.create((View)brand, "carBrandTN");
-        Pair<View, String> p5 = Pair.create((View)name, "carNameTN");
-        Pair<View, String> p6 = Pair.create((View)seatCount, "carSeatCoutTN");
-        Pair<View, String> p7 = Pair.create((View)price, "carPriceTN");
-        Pair<View, String> p8 = Pair.create((View)town, "carTownTN");
+        Pair<View, String> p1 = Pair.create((View) imgContainer, "containerTN");
+        Pair<View, String> p2 = Pair.create((View) imgCar, "carTN");
+        Pair<View, String> p3 = Pair.create((View) title, "carTitleTN");
+        Pair<View, String> p4 = Pair.create((View) brand, "carBrandTN");
+        Pair<View, String> p5 = Pair.create((View) name, "carNameTN");
+        Pair<View, String> p6 = Pair.create((View) seatCount, "carSeatCoutTN");
+        Pair<View, String> p7 = Pair.create((View) price, "carPriceTN");
+        Pair<View, String> p8 = Pair.create((View) town, "carTownTN");
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8);
 
-        startActivityForResult(intent, 100, optionsCompat.toBundle());
+        startActivityForResult(intent, 10, optionsCompat.toBundle());
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 11) {
+//            if (resultCode == RESULT_OK) {
+//                final String firstname = data.getStringExtra("firstname"),
+//                        lastname = data.getStringExtra("lastname"),
+//                        email = data.getStringExtra("email"),
+//                        cellphone = data.getStringExtra("cellphone"),
+//                        workphone = data.getStringExtra("workphone");
+//                final boolean defaultPhone = data.getBooleanExtra("defaultPhone", true);
+//                contacts.add(new Contact(firstname, lastname, cellphone, workphone, email, defaultPhone));
+//                adapterList.notifyItemInserted(adapterList.getItemCount() - 1);
+//            }
+//        } else if (requestCode == 12)
+//            if (resultCode == RESULT_OK) {
+//                final String firstname = data.getStringExtra("firstname"),
+//                        lastname = data.getStringExtra("lastname"),
+//                        email = data.getStringExtra("email"),
+//                        cellphone = data.getStringExtra("cellphone"),
+//                        workphone = data.getStringExtra("workphone");
+//                final boolean defaultPhone = data.getBooleanExtra("defaultPhone", true);
+//                final int index = data.getIntExtra("index", 0);
+//                contacts.get(index).setCellphone(cellphone);
+//                contacts.get(index).setEmail(email);
+//                contacts.get(index).setFirstname(firstname);
+//                contacts.get(index).setLastname(lastname);
+//                contacts.get(index).setWorkphone(workphone);
+//                contacts.get(index).setPhoneDefault(defaultPhone);
+//                adapterList.notifyItemChanged(index);
+//            }
     }
 }
