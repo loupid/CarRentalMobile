@@ -34,9 +34,12 @@ public class AnnoucedCars implements Parcelable {
     @SerializedName("available")
     public boolean available;
 
+    @SerializedName("price")
+    public String price;
 
 
-    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String filepath, boolean available) {
+
+    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String price, String filepath, boolean available) {
         this.brandname = brandname;
         this.carname = carname;
         this.seatcount = seatcount;
@@ -44,6 +47,7 @@ public class AnnoucedCars implements Parcelable {
         this.description = description;
         this.title = title;
         this.filepath = filepath;
+        this.price = price;
         this.available = available;
     }
 

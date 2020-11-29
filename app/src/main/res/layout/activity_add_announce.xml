@@ -11,7 +11,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_weight="3"
             android:orientation="vertical">
 
                 <Button
@@ -96,7 +96,7 @@
                     android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Nombre de siège"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:padding="20dp"
                     android:textSize="20sp"
                     tools:layout_conversion_absoluteHeight="0dp"
@@ -126,7 +126,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_weight="1"
             android:orientation="vertical">
 
                 <EditText
@@ -151,7 +151,7 @@
                     android:drawableTint="#ff690f"
                     android:ems="10"
                     android:hint="Prix"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:padding="20dp"
                     android:textSize="20sp" />
         </LinearLayout>
@@ -159,32 +159,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:drawableStart="@drawable/ic_outline_check_box_24"
-                    android:drawableTint="#ff690f"
-                    android:text="Disponible ?"
-                    android:textSize="24sp" />
-
-                <com.google.android.material.chip.Chip
+                <Switch
                     android:id="@+id/cpAvailable"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:checkedIconTint="#ff690f" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:checked="true"
+                    android:drawableStart="@drawable/ic_outline_check_box_24"
+                    android:drawableTint="#F44336"
+                    android:showText="false"
+                    android:textSize="20sp"
+                    tools:checked="true"
+                    tools:text="Disponible ?" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="1"
             android:backgroundTint="#ff690f"
             android:drawableTint="#ff690f"
             android:padding="20dp"

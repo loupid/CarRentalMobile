@@ -35,12 +35,12 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         loadAnnounceData(annoucedCars);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.burger_menu, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.burger_menu, menu);
+        return true;
+    }
 
     private void loadAnnounceData(AnnoucedCars annoucedCars) {
         carName.setText(annoucedCars.getCarname());

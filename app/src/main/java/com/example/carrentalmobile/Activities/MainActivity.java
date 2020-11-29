@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     //todo: to be removed only to test add animation
     private void addCar() {
         ctr++;
-        AnnoucedCars annoucedCars = new AnnoucedCars(ctr + "", "brand", "car", "5", "category", "description", "lol", true);
+        AnnoucedCars annoucedCars = new AnnoucedCars(ctr + "", "brand", "car", "5", "category", "description", "80","lol", true);
         carsList.add(0, annoucedCars);
         adapterList.notifyItemInserted(1);
     }
@@ -138,18 +138,14 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 11) {
-//            if (resultCode == RESULT_OK) {
-//                final String firstname = data.getStringExtra("firstname"),
-//                        lastname = data.getStringExtra("lastname"),
-//                        email = data.getStringExtra("email"),
-//                        cellphone = data.getStringExtra("cellphone"),
-//                        workphone = data.getStringExtra("workphone");
-//                final boolean defaultPhone = data.getBooleanExtra("defaultPhone", true);
-//                contacts.add(new Contact(firstname, lastname, cellphone, workphone, email, defaultPhone));
-//                adapterList.notifyItemInserted(adapterList.getItemCount() - 1);
-//            }
-//        } else if (requestCode == 12)
+        if (requestCode == 11) {
+            if (resultCode == RESULT_OK) {
+                AnnoucedCars annoucedCars = data.getParcelableExtra("carAnnounce");
+                carsList.add(0, annoucedCars);
+                adapterList.notifyItemInserted(1);
+            }
+        }
+//        else if (requestCode == 12)
 //            if (resultCode == RESULT_OK) {
 //                final String firstname = data.getStringExtra("firstname"),
 //                        lastname = data.getStringExtra("lastname"),
