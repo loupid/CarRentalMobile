@@ -2,4 +2,7 @@
     <string name="app_name">NCar</string>
     <string name="home">home</string>
     <string name="ajouter">Ajouter</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="nom_d_utilisateur_ou_courriel">Nom d\'utilisateur ou courriel</string>
+    <string name="se_connecter">Se connecter</string>
 </resources>

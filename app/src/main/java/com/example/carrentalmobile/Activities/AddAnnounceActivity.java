@@ -62,15 +62,15 @@ public class AddAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_announce);
 
-        etBrand = findViewById(R.id.etBrand);
-        etTitle = findViewById(R.id.etTitle);
+        etBrand = findViewById(R.id.etPassword);
+        etTitle = findViewById(R.id.etUsername);
         etDescription = findViewById(R.id.etDescription);
         etSeatCount = findViewById(R.id.etSeatCount);
         etCarName = findViewById(R.id.etCarName);
         etLocation = findViewById(R.id.etLocation);
         etPrice = findViewById(R.id.etPrice);
         etCateg = findViewById(R.id.etCateg);
-        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd = findViewById(R.id.btnLogin);
         cpAvailable = findViewById(R.id.cpAvailable);
         imgCar = findViewById(R.id.imgCar);
 
