@@ -8,6 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface InterfaceServer {
-    @GET("/Php/CarsList.php")
+    @GET("A2020/420505RI/Equipe_1/Php/CarsList.php")
     Call<List<AnnoucedCars>> getAllCarsListToRent();
 }

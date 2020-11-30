@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class AnnoucedCars implements Parcelable {
 
-    @SerializedName("username")
-    public String username;
+    @SerializedName("idannounce")
+    public String idannounce;
 
     @SerializedName("brandname")
     public String brandname;
@@ -51,12 +51,37 @@ public class AnnoucedCars implements Parcelable {
         this.available = available;
     }
 
-    public String getUsername() {
-        return username;
+    protected AnnoucedCars(Parcel in) {
+        idannounce = in.readString();
+        brandname = in.readString();
+        carname = in.readString();
+        seatcount = in.readString();
+        typename = in.readString();
+        description = in.readString();
+        title = in.readString();
+        filepath = in.readString();
+        available = in.readByte() != 0;
+        price = in.readString();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public static final Creator<AnnoucedCars> CREATOR = new Creator<AnnoucedCars>() {
+        @Override
+        public AnnoucedCars createFromParcel(Parcel in) {
+            return new AnnoucedCars(in);
+        }
+
+        @Override
+        public AnnoucedCars[] newArray(int size) {
+            return new AnnoucedCars[size];
+        }
+    };
+
+    public String getIdannounce() {
+        return idannounce;
+    }
+
+    public void setIdannounce(String idannounce) {
+        this.idannounce = idannounce;
     }
 
     public String getBrandname() {
@@ -124,45 +149,6 @@ public class AnnoucedCars implements Parcelable {
         this.available = available;
     }
 
-    public static Creator<AnnoucedCars> getCREATOR() {
-        return CREATOR;
-    }
-
-    @Override
-    public String toString() {
-        return "Cars{" +
-                "username='" + username + '\'' +
-                ", brandname='" + brandname + '\'' +
-                ", carname='" + carname + '\'' +
-                ", seatcount='" + seatcount + '\'' +
-                ", typename='" + typename + '\'' +
-                ", description='" + description + '\'' +
-                ", title='" + title + '\'' +
-                '}';
-    }
-
-    protected AnnoucedCars(Parcel in) {
-        username = in.readString();
-        brandname = in.readString();
-        carname = in.readString();
-        seatcount = in.readString();
-        typename = in.readString();
-        description = in.readString();
-        title = in.readString();
-    }
-
-    public static final Creator<AnnoucedCars> CREATOR = new Creator<AnnoucedCars>() {
-        @Override
-        public AnnoucedCars createFromParcel(Parcel in) {
-            return new AnnoucedCars(in);
-        }
-
-        @Override
-        public AnnoucedCars[] newArray(int size) {
-            return new AnnoucedCars[size];
-        }
-    };
-
     @Override
     public int describeContents() {
         return 0;
@@ -170,12 +156,15 @@ public class AnnoucedCars implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(username);
+        dest.writeString(idannounce);
         dest.writeString(brandname);
         dest.writeString(carname);
         dest.writeString(seatcount);
         dest.writeString(typename);
         dest.writeString(description);
         dest.writeString(title);
+        dest.writeString(filepath);
+        dest.writeByte((byte) (available ? 1 : 0));
+        dest.writeString(price);
     }
 }

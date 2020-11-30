@@ -47,7 +47,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         title.setText(annoucedCars.getTitle());
         numberPlace.setText(annoucedCars.getSeatcount());
         pricePerDay.setText(annoucedCars.getTypename());
-        location.setText(annoucedCars.getUsername());
+        location.setText(annoucedCars.getIdannounce());
         brand.setText(annoucedCars.getBrandname());
         description.setText(annoucedCars.getDescription());
 

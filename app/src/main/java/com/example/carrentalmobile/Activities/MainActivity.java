@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
             public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 carsList = response.body();
                 adapterList.setAnnoucedCarsList(carsList);
-                adapterList.notifyDataSetChanged();
+//                adapterList.notifyDataSetChanged();
                 recyclerView.setAdapter(adapterList);
             }
 
@@ -145,22 +145,5 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 adapterList.notifyItemInserted(1);
             }
         }
-//        else if (requestCode == 12)
-//            if (resultCode == RESULT_OK) {
-//                final String firstname = data.getStringExtra("firstname"),
-//                        lastname = data.getStringExtra("lastname"),
-//                        email = data.getStringExtra("email"),
-//                        cellphone = data.getStringExtra("cellphone"),
-//                        workphone = data.getStringExtra("workphone");
-//                final boolean defaultPhone = data.getBooleanExtra("defaultPhone", true);
-//                final int index = data.getIntExtra("index", 0);
-//                contacts.get(index).setCellphone(cellphone);
-//                contacts.get(index).setEmail(email);
-//                contacts.get(index).setFirstname(firstname);
-//                contacts.get(index).setLastname(lastname);
-//                contacts.get(index).setWorkphone(workphone);
-//                contacts.get(index).setPhoneDefault(defaultPhone);
-//                adapterList.notifyItemChanged(index);
-//            }
     }
 }

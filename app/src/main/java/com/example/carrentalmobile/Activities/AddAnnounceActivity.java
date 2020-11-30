@@ -68,7 +68,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                         etPrice.getText().toString(),
                         "image",
                         cpAvailable.isChecked());
-                intentReturn.putExtra("annoucedCars", annoucedCars);
+                intentReturn.putExtra("carAnnounce", annoucedCars);
                 setResult(RESULT_OK, intentReturn);
                 finish();
             }

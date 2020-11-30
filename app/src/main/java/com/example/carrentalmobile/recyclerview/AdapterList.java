@@ -42,7 +42,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.title.setText(annoucedCarsList.get(position).getTitle());
         holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
         holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
-        holder.location.setText(annoucedCarsList.get(position).getUsername());
+        holder.location.setText(annoucedCarsList.get(position).getIdannounce());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
 //        holder.imageViewCar.setImageDrawable(annoucedCarsList.get(position).getFilepath());
     }
