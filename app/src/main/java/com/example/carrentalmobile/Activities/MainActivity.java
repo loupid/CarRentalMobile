@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //todo: delete the add/del button (just to test the animation)
-        btnAdd = findViewById(R.id.btnLogin);
+        btnAdd = findViewById(R.id.btnRent);
         btnDel = findViewById(R.id.btnDel);
 
         recyclerView.setItemAnimator(new ItemAnimator());

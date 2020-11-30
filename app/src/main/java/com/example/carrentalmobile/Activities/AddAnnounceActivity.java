@@ -62,7 +62,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_announce);
 
-        etBrand = findViewById(R.id.etPassword);
+        //todo: check edittext id
+        etBrand = findViewById(R.id.etBrand);
         etTitle = findViewById(R.id.etUsername);
         etDescription = findViewById(R.id.etDescription);
         etSeatCount = findViewById(R.id.etSeatCount);
@@ -70,7 +71,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
         etLocation = findViewById(R.id.etLocation);
         etPrice = findViewById(R.id.etPrice);
         etCateg = findViewById(R.id.etCateg);
-        btnAdd = findViewById(R.id.btnLogin);
+        btnAdd = findViewById(R.id.btnRent);
         cpAvailable = findViewById(R.id.cpAvailable);
         imgCar = findViewById(R.id.imgCar);
 
