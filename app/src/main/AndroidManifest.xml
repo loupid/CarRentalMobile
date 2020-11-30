@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.carrentalmobile">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
@@ -10,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarRentalMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.AddAnnounceActivity" />
         <activity android:name=".Activities.AnnounceDetailsActivity" />
         <activity android:name=".Activities.MainActivity">
@@ -21,8 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.carrentalmobile.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>

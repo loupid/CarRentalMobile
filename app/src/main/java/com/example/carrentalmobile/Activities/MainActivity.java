@@ -1,6 +1,5 @@
 package com.example.carrentalmobile.Activities;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
