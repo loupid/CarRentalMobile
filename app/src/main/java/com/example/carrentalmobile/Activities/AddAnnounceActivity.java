@@ -63,17 +63,17 @@ public class AddAnnounceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_announce);
 
         //todo: check edittext id
-        etBrand = findViewById(R.id.etBrand);
-        etTitle = findViewById(R.id.etUsername);
-        etDescription = findViewById(R.id.etDescription);
-        etSeatCount = findViewById(R.id.etSeatCount);
-        etCarName = findViewById(R.id.etCarName);
-        etLocation = findViewById(R.id.etLocation);
-        etPrice = findViewById(R.id.etPrice);
-        etCateg = findViewById(R.id.etCateg);
-        btnAdd = findViewById(R.id.btnRent);
-        cpAvailable = findViewById(R.id.cpAvailable);
-        imgCar = findViewById(R.id.imgCar);
+        etBrand = findViewById(R.id.etAnnounceBrand);
+        etTitle = findViewById(R.id.etAnnounceTitle);
+        etDescription = findViewById(R.id.etAnnounceDescription);
+        etSeatCount = findViewById(R.id.etAnnounceSeatCount);
+        etCarName = findViewById(R.id.etAnnounceCarName);
+        etLocation = findViewById(R.id.etAnnounceLocation);
+        etPrice = findViewById(R.id.etAnnouncePrice);
+        etCateg = findViewById(R.id.etAnnounceCateg);
+        btnAdd = findViewById(R.id.btnAnnounceAdd);
+        cpAvailable = findViewById(R.id.cpAnnounceAvailable);
+        imgCar = findViewById(R.id.imgAnnounceCar);
 
         imgCar.setVisibility(View.INVISIBLE);
         if (checkPermission()) {
