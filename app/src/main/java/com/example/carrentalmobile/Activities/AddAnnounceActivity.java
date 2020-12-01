@@ -229,7 +229,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
         MediaType mediaType = MediaType.parse("image/*");
         RequestBody fichier_requete = RequestBody.create(mediaType, photoFile);
 
-        MultipartBody.Part part_fichier = MultipartBody.Part.createFormData("photo",
+        MultipartBody.Part part_fichier = MultipartBody.Part.createFormData("file",
                 photoFile.getName(),
                 fichier_requete);
 
@@ -239,12 +239,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if (response.body() != null)
-                        Toast.makeText(AddAnnounceActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
 
             @Override

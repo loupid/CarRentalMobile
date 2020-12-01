@@ -18,7 +18,7 @@ public interface InterfaceServer {
     Call<List<AnnoucedCars>> getAllCarsListToRent();
 
     @Multipart
-    @POST("/serveur.php")
+    @POST("Php/Upload.php")
     Call<ResponseBody> upload(
             @Part("requete") RequestBody requete,
             @Part MultipartBody.Part image
