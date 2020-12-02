@@ -3,25 +3,32 @@ package com.example.carrentalmobile.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User implements Parcelable {
     @SerializedName("firstname")
+    @Expose
     public String firstname;
 
     @SerializedName("lastname")
+    @Expose
     public String lastname;
 
     @SerializedName("username")
+    @Expose
     public String username;
 
     @SerializedName("email")
+    @Expose
     public String email;
 
     @SerializedName("phone")
+    @Expose
     public String phone;
 
     @SerializedName("password")
+    @Expose
     public String password;
 
     public User(String firstname, String lastname, String username, String email, String phone, String password) {

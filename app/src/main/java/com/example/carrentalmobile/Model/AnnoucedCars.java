@@ -3,38 +3,49 @@ package com.example.carrentalmobile.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AnnoucedCars implements Parcelable {
 
     @SerializedName("idannounce")
+    @Expose
     public String idannounce;
 
     @SerializedName("brandname")
+    @Expose
     public String brandname;
 
     @SerializedName("carname")
+    @Expose
     public String carname;
 
     @SerializedName("seatcount")
+    @Expose
     public String seatcount;
 
     @SerializedName("typename")
+    @Expose
     public String typename;
 
     @SerializedName("description")
+    @Expose
     public String description;
 
     @SerializedName("title")
+    @Expose
     public String title;
 
     @SerializedName("imgFileName")
+    @Expose
     public String filepath;
 
     @SerializedName("available")
+    @Expose
     public boolean available;
 
     @SerializedName("price")
+    @Expose
     public String price;
 
 
