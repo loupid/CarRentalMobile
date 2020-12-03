@@ -1,5 +1,7 @@
 package com.example.carrentalmobile.recyclerview;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
+import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.R;
 
@@ -44,7 +52,26 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
         holder.location.setText(annoucedCarsList.get(position).getIdannounce());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
-//        holder.imageViewCar.setImageDrawable(annoucedCarsList.get(position).getFilepath());
+        InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
+
+        Call<ResponseBody> call = server.download(annoucedCarsList.get(position).getFilepath());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        // display the image data in a ImageView or save it
+                        Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
+                        holder.imageViewCar.setImageBitmap(bmp);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // TODO
+            }
+        });
     }
 
     @Override
@@ -66,7 +93,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             location = itemView.findViewById(R.id.tvTown);
             brand = itemView.findViewById(R.id.tvBrand);
             description = itemView.findViewById(R.id.tvDescription);
-            imageViewCar = itemView.findViewById(R.id.car_image);
+            imageViewCar = itemView.findViewById(R.id.list_car_image);
             imgContainer = itemView.findViewById(R.id.ivCarInfos);
 
 

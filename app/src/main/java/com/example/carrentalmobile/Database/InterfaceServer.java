@@ -14,10 +14,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Url;
 
 public interface InterfaceServer {
     @GET("Php/CarsList.php")
     Call<List<AnnoucedCars>> getAllCarsListToRent();
+
+    @GET
+    Call<ResponseBody> download(@Url String url);
 
     @Multipart
     @POST("Php/Upload.php")

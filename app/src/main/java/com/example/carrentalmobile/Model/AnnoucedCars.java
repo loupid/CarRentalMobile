@@ -100,7 +100,7 @@ public class AnnoucedCars implements Parcelable {
     }
 
     public String getFilepath() {
-        return filepath;
+        return "Images/" + filepath;
     }
 
     public void setFilepath(String filepath) {

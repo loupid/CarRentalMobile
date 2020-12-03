@@ -37,11 +37,9 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements CarCallback {
     RecyclerView recyclerView;
     AdapterList adapterList;
-    Button btnAdd, btnDel;
-    MenuItem menuAdd;
+    MenuItem menuAdd, menuProfile;
     Context context;
     List<AnnoucedCars> carsList;
-    int ctr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +50,9 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //todo: delete the add/del button (just to test the animation)
-        btnAdd = findViewById(R.id.btnRent);
-        btnDel = findViewById(R.id.btnDel);
-
         recyclerView.setItemAnimator(new ItemAnimator());
 
-        btnAdd.setOnClickListener(v -> addCar());
-
         context = this;
-
-        //todo: replace with a long press button
-        btnDel.setOnClickListener(v -> removeAnnounce());
 
         adapterList = new AdapterList(carsList, this);
 
@@ -77,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
             public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 carsList = response.body();
                 adapterList.setAnnoucedCarsList(carsList);
-//                adapterList.notifyDataSetChanged();
+                adapterList.notifyDataSetChanged();
                 recyclerView.setAdapter(adapterList);
             }
 
@@ -88,27 +77,23 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         });
     }
 
-    private void removeAnnounce() {
-        carsList.remove(0);
-        adapterList.notifyItemRemoved(0);
-    }
-
-    //todo: to be removed only to test add animation
-    private void addCar() {
-        ctr++;
-        AnnoucedCars annoucedCars = new AnnoucedCars(ctr + "", "brand", "car", "5", "category", "description", "80","lol", true);
-        carsList.add(0, annoucedCars);
-        adapterList.notifyItemInserted(1);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.burger_menu, menu);
         menuAdd = menu.findItem(R.id.menuAdd);
+        menuProfile = menu.findItem(R.id.menuProfile);
+
         menuAdd.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(context, AddAnnounceActivity.class);
             startActivityForResult(intent, 11);
+            return false;
+        });
+
+        menuProfile.setOnMenuItemClickListener(menuItem -> {
+            //todo: check if user is logged open profile (add, edit and del announce) else open login/register
+            Intent intent = new Intent(context, LoginActivity.class);
+            startActivityForResult(intent, 12);
             return false;
         });
         return true;
@@ -119,14 +104,14 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         Intent intent = new Intent(getBaseContext(), AnnounceDetailsActivity.class);
         intent.putExtra("carAnnounce", carsList.get(pos));
 
-        Pair<View, String> p1 = Pair.create((View) imgContainer, "containerTN");
-        Pair<View, String> p2 = Pair.create((View) imgCar, "carTN");
-        Pair<View, String> p3 = Pair.create((View) title, "carTitleTN");
-        Pair<View, String> p4 = Pair.create((View) brand, "carBrandTN");
-        Pair<View, String> p5 = Pair.create((View) name, "carNameTN");
-        Pair<View, String> p6 = Pair.create((View) seatCount, "carSeatCoutTN");
-        Pair<View, String> p7 = Pair.create((View) price, "carPriceTN");
-        Pair<View, String> p8 = Pair.create((View) town, "carTownTN");
+        Pair<View, String> p1 = Pair.create(imgContainer, "containerTN");
+        Pair<View, String> p2 = Pair.create(imgCar, "carTN");
+        Pair<View, String> p3 = Pair.create(title, "carTitleTN");
+        Pair<View, String> p4 = Pair.create(brand, "carBrandTN");
+        Pair<View, String> p5 = Pair.create(name, "carNameTN");
+        Pair<View, String> p6 = Pair.create(seatCount, "carSeatCoutTN");
+        Pair<View, String> p7 = Pair.create(price, "carPriceTN");
+        Pair<View, String> p8 = Pair.create(town, "carTownTN");
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8);
 
