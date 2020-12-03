@@ -63,13 +63,15 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
                         // display the image data in a ImageView or save it
                         Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
                         holder.imageViewCar.setImageBitmap(bmp);
+                    } else {
+                        holder.imageViewCar.setImageResource(R.drawable.default_car);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // TODO
+                holder.imageViewCar.setImageResource(R.drawable.default_car);
             }
         });
     }
@@ -95,7 +97,6 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             description = itemView.findViewById(R.id.tvDescription);
             imageViewCar = itemView.findViewById(R.id.list_car_image);
             imgContainer = itemView.findViewById(R.id.ivCarInfos);
-
 
             itemView.setOnClickListener(v -> callback.onCarItemClick(getAdapterPosition(), imgContainer, imageViewCar, title, brand, carName, pricePerDay, numberPlace, location, description));
         }

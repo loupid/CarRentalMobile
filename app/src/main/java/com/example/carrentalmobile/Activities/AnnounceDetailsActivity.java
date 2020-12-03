@@ -70,7 +70,6 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        // display the image data in a ImageView or save it
                         Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
                         imageViewCar.setImageBitmap(bmp);
                     } else {
@@ -81,7 +80,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // TODO
+                imageViewCar.setImageResource(R.drawable.default_car);
             }
         });
     }

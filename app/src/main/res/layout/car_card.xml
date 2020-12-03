@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/ivCarInfos"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/container_bg"
@@ -20,7 +20,7 @@
     <ImageView
         android:id="@+id/list_car_image"
         android:layout_width="160dp"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_outline_title_24"
         android:text="Title of the announce"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/list_car_image"
@@ -46,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_directions_car_24"
         android:text="Brand"
         app:layout_constraintStart_toEndOf="@+id/list_car_image"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -56,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_directions_car_24"
         android:text="CarName"
         app:layout_constraintStart_toEndOf="@+id/tvBrand"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -66,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_people_24"
         android:text="Seat count"
         app:layout_constraintStart_toEndOf="@+id/list_car_image"
         app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
@@ -76,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_attach_money_24"
         android:text="Price"
         app:layout_constraintStart_toEndOf="@+id/tvSeatCount"
         app:layout_constraintTop_toBottomOf="@+id/tvCarName" />
@@ -86,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_baseline_location_on_24"
         android:text="Town"
         app:layout_constraintStart_toEndOf="@+id/list_car_image"
         app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
