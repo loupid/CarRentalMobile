@@ -19,8 +19,6 @@ import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.R;
 
-import java.util.List;
-
 public class AnnounceDetailsActivity extends AppCompatActivity {
 
     TextView carName, title, numberPlace, pricePerDay, location, brand, description;
@@ -57,7 +55,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         carName.setText(annoucedCars.getCarname());
         title.setText(annoucedCars.getTitle());
         numberPlace.setText(annoucedCars.getSeatcount());
-        pricePerDay.setText(annoucedCars.getTypename());
+        pricePerDay.setText(annoucedCars.getCategory());
         location.setText(annoucedCars.getIdannounce());
         brand.setText(annoucedCars.getBrandname());
         description.setText(annoucedCars.getDescription());

@@ -49,7 +49,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.carName.setText(annoucedCarsList.get(position).getCarname());
         holder.title.setText(annoucedCarsList.get(position).getTitle());
         holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
-        holder.pricePerDay.setText(annoucedCarsList.get(position).getTypename());
+        holder.pricePerDay.setText(annoucedCarsList.get(position).getPrice());
         holder.location.setText(annoucedCarsList.get(position).getIdannounce());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
         InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);

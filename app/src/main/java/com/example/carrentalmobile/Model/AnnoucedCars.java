@@ -24,9 +24,9 @@ public class AnnoucedCars implements Parcelable {
     @Expose
     public String seatcount;
 
-    @SerializedName("typename")
+    @SerializedName("Category")
     @Expose
-    public String typename;
+    public String category;
 
     @SerializedName("description")
     @Expose
@@ -36,7 +36,7 @@ public class AnnoucedCars implements Parcelable {
     @Expose
     public String title;
 
-    @SerializedName("imgFileName")
+    @SerializedName("imgfilepath")
     @Expose
     public String filepath;
 
@@ -50,11 +50,11 @@ public class AnnoucedCars implements Parcelable {
 
 
 
-    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String typename, String description, String price, String filepath, boolean available) {
+    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String category, String description, String price, String filepath, boolean available) {
         this.brandname = brandname;
         this.carname = carname;
         this.seatcount = seatcount;
-        this.typename = typename;
+        this.category = category;
         this.description = description;
         this.title = title;
         this.filepath = filepath;
@@ -67,7 +67,7 @@ public class AnnoucedCars implements Parcelable {
         brandname = in.readString();
         carname = in.readString();
         seatcount = in.readString();
-        typename = in.readString();
+        category = in.readString();
         description = in.readString();
         title = in.readString();
         filepath = in.readString();
@@ -135,12 +135,12 @@ public class AnnoucedCars implements Parcelable {
         this.seatcount = seatcount;
     }
 
-    public String getTypename() {
-        return typename;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTypename(String typename) {
-        this.typename = typename;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {
@@ -151,7 +151,16 @@ public class AnnoucedCars implements Parcelable {
         this.description = description;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     //todo: check if availbe to be displayed in the announce list
+    //TODO$WH yo la query filtre deja les voiture pour faire afficher que les voitures available
     public boolean isAvailable() {
         return available;
     }
@@ -171,7 +180,7 @@ public class AnnoucedCars implements Parcelable {
         dest.writeString(brandname);
         dest.writeString(carname);
         dest.writeString(seatcount);
-        dest.writeString(typename);
+        dest.writeString(category);
         dest.writeString(description);
         dest.writeString(title);
         dest.writeString(filepath);

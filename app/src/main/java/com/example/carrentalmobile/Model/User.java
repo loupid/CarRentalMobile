@@ -23,7 +23,7 @@ public class User implements Parcelable {
     @Expose
     public String email;
 
-    @SerializedName("phone")
+    @SerializedName("phonenumber")
     @Expose
     public String phone;
 
