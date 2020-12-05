@@ -51,23 +51,28 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 Api server = RetroFitInstance.getInstance().create((Api.class));
-                Call<ResponseBody> call = server.login(
+                Intent intentReturn = new Intent();
+                Call<Integer> call = server.login(
                         etUsername.getText().toString(),
                         etPassword.getText().toString()
                 );
-                call.enqueue(new Callback<ResponseBody>() {
+                call.enqueue(new Callback<Integer>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        Integer successful = response.body();
+                        if (successful > 0) {
+                            Toast.makeText(getApplicationContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
+                            intentReturn.putExtra("username", etUsername.getText().toString());
+                            intentReturn.putExtra("id", successful);
+                            finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Erreur dans le mot de passe!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    public void onFailure(Call<Integer> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Erreur de connexion au serveur", Toast.LENGTH_SHORT).show();
                     }
                 });
 

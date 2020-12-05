@@ -90,43 +90,35 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(v -> {
             Intent intentReturn = new Intent();
+            int userConnectedId = intentReturn.getIntExtra("id", 0);
             if (etTitle.getText().toString().equals("")) {
                 etTitle.setError("Le champ titre ne peut pas être vide!");
                 etTitle.requestFocus();
-            }
-            else if (etBrand.getText().toString().equals("")) {
+            } else if (etBrand.getText().toString().equals("")) {
                 etBrand.setError("Le champ marque ne peut pas être vide!");
                 etBrand.requestFocus();
-            }
-            else if (etCarName.getText().toString().equals("")) {
+            } else if (etCarName.getText().toString().equals("")) {
                 etCarName.setError("Le champ modèle ne peut pas être vide!");
                 etCarName.requestFocus();
-            }
-            else if (etCateg.getText().toString().equals("")) {
+            } else if (etCateg.getText().toString().equals("")) {
                 etCateg.setError("Le champ catégorie ne peut pas être vide!");
                 etCateg.requestFocus();
-            }
-            else if (etLocation.getText().toString().equals("")) {
+            } else if (etLocation.getText().toString().equals("")) {
                 etLocation.setError("Le champ localisation ne peut pas être vide!");
                 etLocation.requestFocus();
-            }
-            else if (etSeatCount.getText().toString().equals("")) {
+            } else if (etSeatCount.getText().toString().equals("")) {
                 etSeatCount.setError("Le champ nombre de passager ne peut pas être vide!");
                 etSeatCount.requestFocus();
-            }
-            else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0) {
+            } else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0) {
                 etSeatCount.setError("Le champ nombre de passager doit être strictement positif!");
                 etSeatCount.requestFocus();
-            }
-            else if (etPrice.getText().toString().equals("")) {
+            } else if (etPrice.getText().toString().equals("")) {
                 etPrice.setError("Le champ prix ne peut pas être vide!");
                 etPrice.requestFocus();
-            }
-            else if (Double.parseDouble(etPrice.getText().toString()) <= 0) {
+            } else if (Double.parseDouble(etPrice.getText().toString()) <= 0) {
                 etCarName.setError("Le champ prix doit être strictement positif!");
                 etCarName.requestFocus();
-            }
-            else {
+            } else {
                 final ProgressDialog progressDialog = new ProgressDialog(AddAnnounceActivity.this);
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Veuillez patienter");
@@ -142,23 +134,29 @@ public class AddAnnounceActivity extends AppCompatActivity {
                         photoFile.getName(),
                         cpAvailable.isChecked(),
                         etPrice.getText().toString());
-                intentReturn.putExtra("carAnnounce", annoucedCars);
-                setResult(RESULT_OK, intentReturn);
-                Api serveur = RetroFitInstance.getInstance().create((Api.class));
-                Call<ResponseBody> call = serveur.addAnnounce(
+                Api server = RetroFitInstance.getInstance().create((Api.class));
+                Call<ResponseBody> call = server.addAnnounce(
+                        userConnectedId + "",
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etCarName.getText().toString(),
                         etDescription.getText().toString(),
                         etSeatCount.getText().toString(),
                         etCateg.getText().toString(),
+                        etLocation.getText().toString(),
                         photoFile.getName(),
-                        etPrice.getText().toString().replace("$/jour", ""),
+                        etPrice.getText().toString(),
                         cpAvailable.isChecked());
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
+                        ResponseBody responseBody = response.body();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Ajout réussi!", Toast.LENGTH_SHORT).show();
+                            intentReturn.putExtra("carAnnounce", annoucedCars);
+                            setResult(RESULT_OK, intentReturn);
+                        } else
+                            Toast.makeText(getApplicationContext(), "Erreur d'ajout", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
 

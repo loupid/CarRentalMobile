@@ -28,7 +28,7 @@ public interface Api {
 
     @POST("Php/Login.php")
     @FormUrlEncoded
-    Call<ResponseBody> login(
+    Call<Integer> login(
             @Field("username") String username,
             @Field("password") String password
     );
@@ -43,12 +43,14 @@ public interface Api {
     @POST("Php/AddAnnounce.php")
     @FormUrlEncoded
     Call<ResponseBody> addAnnounce(
+            @Field("IdUserOwner") String IdUserOwner,
             @Field("title") String title,
             @Field("brandname") String brand,
             @Field("carname") String car,
             @Field("description") String description,
             @Field("seatcount") String seatcount,
-            @Field("typename") String typename,
+            @Field("category") String category,
+            @Field("location") String location,
             @Field("imgfilepath") String imgfilepath,
             @Field("price") String price,
             @Field("available") boolean available);
@@ -58,9 +60,9 @@ public interface Api {
     Call<ResponseBody> register(
             @Field("firstname") String firstname,
             @Field("lastname") String lastname,
-            @Field("username") String username,
-            @Field("email") String email,
             @Field("phonenumber") String phonenumber,
-            @Field("password") String password
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("username") String username
     );
 }

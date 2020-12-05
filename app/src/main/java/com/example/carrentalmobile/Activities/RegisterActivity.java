@@ -96,10 +96,10 @@ public class RegisterActivity extends AppCompatActivity {
                 Call<ResponseBody> call = serveur.register(
                         etFirstname.getText().toString(),
                         etLastname.getText().toString(),
-                        etUsername.getText().toString(),
-                        etEmail.getText().toString(),
                         etPhone.getText().toString(),
-                        etPassword.getText().toString());
+                        etEmail.getText().toString(),
+                        etPassword.getText().toString(),
+                        etUsername.getText().toString());
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

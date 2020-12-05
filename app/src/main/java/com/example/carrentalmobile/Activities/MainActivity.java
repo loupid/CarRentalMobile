@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.Model.User;
 import com.example.carrentalmobile.R;
 import com.example.carrentalmobile.recyclerview.AdapterList;
 import com.example.carrentalmobile.recyclerview.CarCallback;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     MenuItem menuAdd, menuProfile;
     Context context;
     List<AnnoucedCars> carsList;
+    String connectedUsername;
+    int connectedUserId = 0;
+    User connectedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +89,19 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
         menuAdd.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(context, AddAnnounceActivity.class);
+            intent.putExtra("id", connectedUserId);
             startActivityForResult(intent, 11);
             return false;
         });
 
         menuProfile.setOnMenuItemClickListener(menuItem -> {
             //todo: check if user is logged open profile (add, edit and del announce) else open login/register
-            Intent intent = new Intent(context, LoginActivity.class);
-            startActivityForResult(intent, 12);
+            if (connectedUserId <= 0) {
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivityForResult(intent, 12);
+            } else {
+                //todo: open dashboard
+            }
             return false;
         });
         return true;
@@ -128,6 +137,15 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 carsList.add(0, annoucedCars);
                 adapterList.notifyItemInserted(1);
             }
+        } else if (requestCode == 12) {
+            connectedUsername = getIntent().getStringExtra("username");
+            connectedUserId = getIntent().getIntExtra("id", 0);
+            //todo: server request to get all user info
+            //todo : launch profile
         }
+    }
+
+    public boolean userIsConnected() {
+        return connectedUser != null;
     }
 }
