@@ -1,6 +1,7 @@
 package com.example.carrentalmobile.Database;
 
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.Model.LoginResponse;
 import com.example.carrentalmobile.Model.User;
 
 import java.util.List;
@@ -18,15 +19,19 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Url;
 
-public interface InterfaceServer {
+public interface Api {
     @GET("Php/CarsList.php")
     Call<List<AnnoucedCars>> getAllCarsListToRent();
 
     @GET
     Call<ResponseBody> download(@Url String url);
 
-    @GET("Php/Login.php")
-    Call<ResponseBody> login();
+    @POST("Php/Login.php")
+    @FormUrlEncoded
+    Call<ResponseBody> login(
+            @Field("username") String username,
+            @Field("password") String password
+    );
 
     @Multipart
     @POST("Php/Upload.php")

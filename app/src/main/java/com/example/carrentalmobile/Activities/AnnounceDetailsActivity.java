@@ -14,7 +14,7 @@ import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.R;
@@ -65,7 +65,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
             description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         category.setText(annoucedCars.getCategory());
 
-        InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
+        Api server = RetroFitInstance.getInstance().create(Api.class);
 
         Call<ResponseBody> call = server.download(annoucedCars.getFilepath());
         call.enqueue(new Callback<ResponseBody>() {

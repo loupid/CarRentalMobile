@@ -13,7 +13,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -36,10 +35,9 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
-import com.example.carrentalmobile.Model.User;
 import com.example.carrentalmobile.R;
 
 import java.io.File;
@@ -146,7 +144,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                         etPrice.getText().toString());
                 intentReturn.putExtra("carAnnounce", annoucedCars);
                 setResult(RESULT_OK, intentReturn);
-                InterfaceServer serveur = RetroFitInstance.getInstance().create((InterfaceServer.class));
+                Api serveur = RetroFitInstance.getInstance().create((Api.class));
                 Call<ResponseBody> call = serveur.addAnnounce(
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
@@ -305,7 +303,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 photoFile.getName(),
                 fichier_requete);
 
-        InterfaceServer serveur = RetroFitInstance.getInstance().create((InterfaceServer.class));
+        Api serveur = RetroFitInstance.getInstance().create((Api.class));
         Call<ResponseBody> call = serveur.upload(requete, part_fichier);
 
         call.enqueue(new Callback<ResponseBody>() {

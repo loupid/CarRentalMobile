@@ -16,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.R;
@@ -52,7 +52,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.pricePerDay.setText(annoucedCarsList.get(position).getPrice());
         holder.location.setText(annoucedCarsList.get(position).getLocation());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
-        InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
+        Api server = RetroFitInstance.getInstance().create(Api.class);
 
         Call<ResponseBody> call = server.download(annoucedCarsList.get(position).getFilepath());
         call.enqueue(new Callback<ResponseBody>() {

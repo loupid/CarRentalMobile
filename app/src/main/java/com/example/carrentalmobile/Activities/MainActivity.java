@@ -7,12 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.R;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
         adapterList = new AdapterList(carsList, this);
 
-        InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
+        Api server = RetroFitInstance.getInstance().create(Api.class);
 
         Call<List<AnnoucedCars>> call = server.getAllCarsListToRent();
 

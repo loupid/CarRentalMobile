@@ -15,15 +15,12 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.carrentalmobile.Database.InterfaceServer;
+import com.example.carrentalmobile.Database.Api;
 import com.example.carrentalmobile.Database.RetroFitInstance;
-import com.example.carrentalmobile.Model.AnnoucedCars;
-import com.example.carrentalmobile.Model.User;
 import com.example.carrentalmobile.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -95,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Veuillez patienter");
                 progressDialog.show();
-                InterfaceServer serveur = RetroFitInstance.getInstance().create((InterfaceServer.class));
+                Api serveur = RetroFitInstance.getInstance().create((Api.class));
                 Call<ResponseBody> call = serveur.register(
                         etFirstname.getText().toString(),
                         etLastname.getText().toString(),
