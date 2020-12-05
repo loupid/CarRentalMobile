@@ -16,6 +16,10 @@ public class AnnoucedCars implements Parcelable {
     @Expose
     public String brandname;
 
+    @SerializedName("location")
+    @Expose
+    public String location;
+
     @SerializedName("carname")
     @Expose
     public String carname;
@@ -24,7 +28,7 @@ public class AnnoucedCars implements Parcelable {
     @Expose
     public String seatcount;
 
-    @SerializedName("Category")
+    @SerializedName("category")
     @Expose
     public String category;
 
@@ -48,23 +52,23 @@ public class AnnoucedCars implements Parcelable {
     @Expose
     public String price;
 
-
-
-    public AnnoucedCars(String title, String brandname, String carname, String seatcount, String category, String description, String price, String filepath, boolean available) {
+    public AnnoucedCars(String title, String brandname, String location, String carname, String seatcount, String category, String description, String filepath, boolean available, String price) {
         this.brandname = brandname;
+        this.location = location;
         this.carname = carname;
         this.seatcount = seatcount;
         this.category = category;
         this.description = description;
         this.title = title;
         this.filepath = filepath;
-        this.price = price;
         this.available = available;
+        this.price = price;
     }
 
     protected AnnoucedCars(Parcel in) {
         idannounce = in.readString();
         brandname = in.readString();
+        location = in.readString();
         carname = in.readString();
         seatcount = in.readString();
         category = in.readString();
@@ -152,7 +156,7 @@ public class AnnoucedCars implements Parcelable {
     }
 
     public String getPrice() {
-        return price;
+        return price + " $/jour";
     }
 
     public void setPrice(String price) {
@@ -160,7 +164,7 @@ public class AnnoucedCars implements Parcelable {
     }
 
     //todo: check if availbe to be displayed in the announce list
-    //TODO$WH yo la query filtre deja les voiture pour faire afficher que les voitures available
+    //TODO$WH yo la query filtre deja les voiture pour faire afficher que les voitures available parf
     public boolean isAvailable() {
         return available;
     }
@@ -169,22 +173,31 @@ public class AnnoucedCars implements Parcelable {
         this.available = available;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(idannounce);
-        dest.writeString(brandname);
-        dest.writeString(carname);
-        dest.writeString(seatcount);
-        dest.writeString(category);
-        dest.writeString(description);
-        dest.writeString(title);
-        dest.writeString(filepath);
-        dest.writeByte((byte) (available ? 1 : 0));
-        dest.writeString(price);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(idannounce);
+        parcel.writeString(brandname);
+        parcel.writeString(location);
+        parcel.writeString(carname);
+        parcel.writeString(seatcount);
+        parcel.writeString(category);
+        parcel.writeString(description);
+        parcel.writeString(title);
+        parcel.writeString(filepath);
+        parcel.writeByte((byte) (available ? 1 : 0));
+        parcel.writeString(price);
     }
 }

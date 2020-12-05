@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
             @Override
             public void onFailure(Call<List<AnnoucedCars>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Erreur de connexion au serveur", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -112,8 +112,9 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         Pair<View, String> p6 = Pair.create(seatCount, "carSeatCoutTN");
         Pair<View, String> p7 = Pair.create(price, "carPriceTN");
         Pair<View, String> p8 = Pair.create(town, "carTownTN");
+        Pair<View, String> p9 = Pair.create(town, "carCategTN");
 
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8);
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
 
         startActivityForResult(intent, 10, optionsCompat.toBundle());
 

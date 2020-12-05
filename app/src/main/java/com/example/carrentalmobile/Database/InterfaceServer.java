@@ -1,6 +1,7 @@
 package com.example.carrentalmobile.Database;
 
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.Model.User;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,6 +25,9 @@ public interface InterfaceServer {
     @GET
     Call<ResponseBody> download(@Url String url);
 
+    @GET("Php/Login.php")
+    Call<ResponseBody> login();
+
     @Multipart
     @POST("Php/Upload.php")
     Call<ResponseBody> upload(
@@ -37,9 +42,20 @@ public interface InterfaceServer {
             @Field("brandname") String brand,
             @Field("carname") String car,
             @Field("description") String description,
-            @Field("seatcount") String caseatcountr,
+            @Field("seatcount") String seatcount,
             @Field("typename") String typename,
-            @Field("imgFileName") String imgFileName,
+            @Field("imgfilepath") String imgfilepath,
             @Field("price") String price,
-            @Field("available") String available);
+            @Field("available") boolean available);
+
+    @POST("Php/Register.php")
+    @FormUrlEncoded
+    Call<ResponseBody> register(
+            @Field("firstname") String firstname,
+            @Field("lastname") String lastname,
+            @Field("username") String username,
+            @Field("email") String email,
+            @Field("phonenumber") String phonenumber,
+            @Field("password") String password
+    );
 }

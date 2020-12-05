@@ -21,7 +21,7 @@ import com.example.carrentalmobile.R;
 
 public class AnnounceDetailsActivity extends AppCompatActivity {
 
-    TextView carName, title, numberPlace, pricePerDay, location, brand, description;
+    TextView carName, title, numberPlace, pricePerDay, location, brand, description, category;
     ImageView imageViewCar;
 
 
@@ -37,6 +37,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         pricePerDay = findViewById(R.id.tvPrice);
         location = findViewById(R.id.tvTown);
         brand = findViewById(R.id.tvBrand);
+        category = findViewById(R.id.tvCategory);
         description = findViewById(R.id.tvDescription);
         imageViewCar = findViewById(R.id.details_car_image);
 
@@ -55,10 +56,14 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         carName.setText(annoucedCars.getCarname());
         title.setText(annoucedCars.getTitle());
         numberPlace.setText(annoucedCars.getSeatcount());
-        pricePerDay.setText(annoucedCars.getCategory());
-        location.setText(annoucedCars.getIdannounce());
+        pricePerDay.setText(annoucedCars.getPrice());
+        location.setText(annoucedCars.getLocation());
         brand.setText(annoucedCars.getBrandname());
-        description.setText(annoucedCars.getDescription());
+        if (annoucedCars.getDescription() != null)
+            description.setText(annoucedCars.getDescription());
+        else
+            description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+        category.setText(annoucedCars.getCategory());
 
         InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
 

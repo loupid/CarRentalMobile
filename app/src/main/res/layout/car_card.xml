@@ -20,13 +20,12 @@
     <ImageView
         android:id="@+id/list_car_image"
         android:layout_width="160dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivCarInfos"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/ivCarInfos"
         app:srcCompat="@drawable/surprise_heard_of_a_sony_car" />
 
     <TextView
@@ -37,6 +36,7 @@
         android:layout_marginTop="10dp"
         android:drawableStart="@drawable/ic_outline_title_24"
         android:text="Title of the announce"
+        android:maxLines="2"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/list_car_image"
         app:layout_constraintTop_toTopOf="@+id/ivCarInfos" />

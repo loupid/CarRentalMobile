@@ -13,8 +13,11 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Field;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,6 +28,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +39,7 @@ import android.widget.Toast;
 import com.example.carrentalmobile.Database.InterfaceServer;
 import com.example.carrentalmobile.Database.RetroFitInstance;
 import com.example.carrentalmobile.Model.AnnoucedCars;
+import com.example.carrentalmobile.Model.User;
 import com.example.carrentalmobile.R;
 
 import java.io.File;
@@ -54,6 +59,9 @@ public class AddAnnounceActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     String currentPhotoPath;
+    MenuItem menuAdd, menuProfile;
+
+    Context context;
 
     File photoFile;
 
@@ -75,6 +83,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
         cpAvailable = findViewById(R.id.cpAnnounceAvailable);
         imgCar = findViewById(R.id.imgAnnounceCar);
 
+        context = this;
+
         imgCar.setVisibility(View.INVISIBLE);
         if (checkPermission()) {
             launchProgram();
@@ -82,37 +92,84 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(v -> {
             Intent intentReturn = new Intent();
-            if (etTitle.getText().toString().equals(""))
+            if (etTitle.getText().toString().equals("")) {
                 etTitle.setError("Le champ titre ne peut pas être vide!");
-            else if (etBrand.getText().toString().equals(""))
+                etTitle.requestFocus();
+            }
+            else if (etBrand.getText().toString().equals("")) {
                 etBrand.setError("Le champ marque ne peut pas être vide!");
-            else if (etCarName.getText().toString().equals(""))
+                etBrand.requestFocus();
+            }
+            else if (etCarName.getText().toString().equals("")) {
                 etCarName.setError("Le champ modèle ne peut pas être vide!");
-            else if (etCateg.getText().toString().equals(""))
+                etCarName.requestFocus();
+            }
+            else if (etCateg.getText().toString().equals("")) {
                 etCateg.setError("Le champ catégorie ne peut pas être vide!");
-            else if (etLocation.getText().toString().equals(""))
+                etCateg.requestFocus();
+            }
+            else if (etLocation.getText().toString().equals("")) {
                 etLocation.setError("Le champ localisation ne peut pas être vide!");
-            else if (etSeatCount.getText().toString().equals(""))
+                etLocation.requestFocus();
+            }
+            else if (etSeatCount.getText().toString().equals("")) {
                 etSeatCount.setError("Le champ nombre de passager ne peut pas être vide!");
-            else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0)
+                etSeatCount.requestFocus();
+            }
+            else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0) {
                 etSeatCount.setError("Le champ nombre de passager doit être strictement positif!");
-            else if (etPrice.getText().toString().equals(""))
+                etSeatCount.requestFocus();
+            }
+            else if (etPrice.getText().toString().equals("")) {
                 etPrice.setError("Le champ prix ne peut pas être vide!");
-            else if (Double.parseDouble(etPrice.getText().toString()) <= 0)
+                etPrice.requestFocus();
+            }
+            else if (Double.parseDouble(etPrice.getText().toString()) <= 0) {
                 etCarName.setError("Le champ prix doit être strictement positif!");
+                etCarName.requestFocus();
+            }
             else {
+                final ProgressDialog progressDialog = new ProgressDialog(AddAnnounceActivity.this);
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Veuillez patienter");
+                progressDialog.show();
                 AnnoucedCars annoucedCars = new AnnoucedCars(
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
+                        etLocation.getText().toString(),
                         etCarName.getText().toString(),
                         etSeatCount.getText().toString(),
                         etCateg.getText().toString(),
                         etDescription.getText().toString(),
-                        etPrice.getText().toString(),
-                        "image",
-                        cpAvailable.isChecked());
+                        photoFile.getName(),
+                        cpAvailable.isChecked(),
+                        etPrice.getText().toString());
                 intentReturn.putExtra("carAnnounce", annoucedCars);
                 setResult(RESULT_OK, intentReturn);
+                InterfaceServer serveur = RetroFitInstance.getInstance().create((InterfaceServer.class));
+                Call<ResponseBody> call = serveur.addAnnounce(
+                        etTitle.getText().toString(),
+                        etBrand.getText().toString(),
+                        etCarName.getText().toString(),
+                        etDescription.getText().toString(),
+                        etSeatCount.getText().toString(),
+                        etCateg.getText().toString(),
+                        photoFile.getName(),
+                        etPrice.getText().toString().replace("$/jour", ""),
+                        cpAvailable.isChecked());
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(AddAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                });
                 finish();
             }
         });
@@ -122,6 +179,21 @@ public class AddAnnounceActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuProfile = menu.findItem(R.id.menuProfile);
+
+        menuAdd.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(context, AddAnnounceActivity.class);
+            startActivityForResult(intent, 11);
+            return false;
+        });
+
+        menuProfile.setOnMenuItemClickListener(menuItem -> {
+            //todo: check if user is logged open profile (add, edit and del announce) else open login/register
+            Intent intent = new Intent(context, LoginActivity.class);
+            startActivityForResult(intent, 12);
+            return false;
+        });
         return true;
     }
 

@@ -50,7 +50,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.title.setText(annoucedCarsList.get(position).getTitle());
         holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
         holder.pricePerDay.setText(annoucedCarsList.get(position).getPrice());
-        holder.location.setText(annoucedCarsList.get(position).getIdannounce());
+        holder.location.setText(annoucedCarsList.get(position).getLocation());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
         InterfaceServer server = RetroFitInstance.getInstance().create(InterfaceServer.class);
 
@@ -60,7 +60,6 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        // display the image data in a ImageView or save it
                         Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
                         holder.imageViewCar.setImageBitmap(bmp);
                     } else {

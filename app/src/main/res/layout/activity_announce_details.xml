@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +10,7 @@
     <ImageView
         android:id="@+id/ivCarInfos"
         android:layout_width="0dp"
-        android:layout_height="175dp"
+        android:layout_height="200dp"
         android:background="@drawable/container_bg"
         android:backgroundTint="#FDEBD0"
         android:transitionName="containerTN"
@@ -24,7 +25,7 @@
         android:layout_width="176dp"
         android:layout_height="140dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:scaleType="centerCrop"
         android:transitionName="carTN"
         app:layout_constraintStart_toStartOf="@+id/ivCarInfos"
@@ -35,12 +36,16 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="12dp"
         android:drawableStart="@drawable/ic_outline_title_24"
+        android:maxLines="2"
         android:text="Title of the announce"
         android:textStyle="bold"
         android:transitionName="carTitleTN"
+        app:layout_constraintEnd_toEndOf="@+id/ivCarInfos"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toEndOf="@+id/details_car_image"
         app:layout_constraintTop_toTopOf="@+id/ivCarInfos" />
 
@@ -102,7 +107,7 @@
         android:text="Town"
         android:transitionName="carTownTN"
         app:layout_constraintStart_toEndOf="@+id/details_car_image"
-        app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -135,5 +140,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         app:layout_constraintVertical_bias="0.88" />
+
+    <TextView
+        android:id="@+id/tvCategory"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_baseline_category_24"
+        android:text="Catégorie"
+        android:transitionName="carCategTN"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
