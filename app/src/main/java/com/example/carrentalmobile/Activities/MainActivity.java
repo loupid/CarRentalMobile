@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 adapterList.setAnnoucedCarsList(carsList);
                 adapterList.notifyDataSetChanged();
                 recyclerView.setAdapter(adapterList);
+                Toast.makeText(MainActivity.this, "Resset cars list", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
         menuAdd.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(context, AddAnnounceActivity.class);
+            //todo add only if user is logged
             intent.putExtra("id", connectedUserId);
             startActivityForResult(intent, 11);
             return false;
@@ -133,9 +135,9 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 11) {
             if (resultCode == RESULT_OK) {
-                AnnoucedCars annoucedCars = data.getParcelableExtra("carAnnounce");
+                AnnoucedCars annoucedCars = data.getParcelableExtra("newAnnounce");
                 carsList.add(0, annoucedCars);
-                adapterList.notifyItemInserted(1);
+                adapterList.notifyItemInserted(0);
             }
         } else if (requestCode == 12) {
             connectedUsername = getIntent().getStringExtra("username");

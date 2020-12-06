@@ -5,4 +5,5 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="nom_d_utilisateur_ou_courriel">Nom d\'utilisateur ou courriel</string>
     <string name="se_connecter">Se connecter</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

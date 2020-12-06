@@ -90,7 +90,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(v -> {
             Intent intentReturn = new Intent();
-            int userConnectedId = intentReturn.getIntExtra("id", 0);
+            Intent intent = getIntent();
+            int userConnectedId = intent.getIntExtra("id", 0);
             if (etTitle.getText().toString().equals("")) {
                 etTitle.setError("Le champ titre ne peut pas être vide!");
                 etTitle.requestFocus();
@@ -123,7 +124,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Veuillez patienter");
                 progressDialog.show();
-                AnnoucedCars annoucedCars = new AnnoucedCars(
+                AnnoucedCars newAnnounce = new AnnoucedCars(
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etLocation.getText().toString(),
@@ -134,6 +135,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
                         photoFile.getName(),
                         cpAvailable.isChecked(),
                         etPrice.getText().toString());
+                intentReturn.putExtra("newAnnounce", newAnnounce);
+                setResult(RESULT_OK, intentReturn);
                 Api server = RetroFitInstance.getInstance().create((Api.class));
                 Call<ResponseBody> call = server.addAnnounce(
                         userConnectedId + "",
@@ -150,11 +153,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        ResponseBody responseBody = response.body();
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Ajout réussi!", Toast.LENGTH_SHORT).show();
-                            intentReturn.putExtra("carAnnounce", annoucedCars);
-                            setResult(RESULT_OK, intentReturn);
                         } else
                             Toast.makeText(getApplicationContext(), "Erreur d'ajout", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
@@ -228,9 +228,9 @@ public class AddAnnounceActivity extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* dossier */
+                imageFileName,
+                ".jpg",
+                storageDir
         );
 
         // Save a file: path for use with ACTION_VIEW intents

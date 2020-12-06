@@ -6,11 +6,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +44,11 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         imageViewCar = findViewById(R.id.details_car_image);
 
         loadAnnounceData(annoucedCars);
+
+        location.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+            startActivity(intent);
+        });
     }
 
 
