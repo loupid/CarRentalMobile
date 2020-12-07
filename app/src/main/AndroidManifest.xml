@@ -10,11 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarRentalMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.EditAnnounceActivity"></activity>
-        <activity android:name=".Activities.MyRentsActivity" />
-        <activity android:name=".Activities.MyAnnouncesActivity" />
-        <activity android:name=".Activities.DashboardActivity" />
-        <activity android:name=".Activities.EditUserActivity" />
+        <activity
+            android:name=".Activities.EditAnnounceActivity"
+            android:parentActivityName=".Activities.MyAnnouncesActivity" />
+        <activity
+            android:name=".Activities.MyRentsActivity"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.MyAnnouncesActivity"
+            android:parentActivityName=".Activities.DashboardActivity" />
+        <activity
+            android:name=".Activities.DashboardActivity"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.EditUserActivity"
+            android:parentActivityName=".Activities.DashboardActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -25,10 +35,8 @@
         -->
         <activity
             android:name=".Activities.MapsActivity2"
-            android:label="@string/title_activity_maps2" />
-        <activity
-            android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps2"
+            android:parentActivityName=".Activities.AnnounceDetailsActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,10 +45,18 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.AddAnnounceActivity" />
-        <activity android:name=".Activities.AnnounceDetailsActivity" />
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:parentActivityName=".Activities.MainActivity"/>
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:parentActivityName=".Activities.MainActivity"/>
+        <activity
+            android:name=".Activities.AddAnnounceActivity"
+            android:parentActivityName=".Activities.MainActivity"/>
+        <activity
+            android:name=".Activities.AnnounceDetailsActivity"
+            android:parentActivityName=".Activities.MainActivity"/>
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

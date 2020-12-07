@@ -11,8 +11,6 @@
     <string name="mes_annonces">Mes annonces</string>
     <string name="mes_locations">Mes locations</string>
     <string name="voiture_louer">Voiture à louer</string>
-    <string name="mes_annonces">Mes annonces</string>
-    <string name="mes_locations">Mes locations</string>
     <string name="se_d_connecter">Se déconnecter</string>
     <string name="modifier">Modifier</string>
 </resources>
