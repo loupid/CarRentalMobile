@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     MenuItem menuAdd, menuProfile;
     Context context;
     List<AnnoucedCars> carsList;
-    String connectedUsername;
     int connectedUserId = 0;
     User connectedUser;
+    final int REQUEST_CODE_LOGIN_ADD = 21, REQUEST_CODE_LOGIN_PROFILE = 12, REQUEST_CODE_DETAILS = 10, REQUEST_CODE_DASHBOARD = 31, REQUEST_CODE_ADD_ANNOUNCE = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 adapterList.setAnnoucedCarsList(carsList);
                 adapterList.notifyDataSetChanged();
                 recyclerView.setAdapter(adapterList);
-                Toast.makeText(MainActivity.this, "Resset cars list", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,24 +88,34 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         menuProfile = menu.findItem(R.id.menuProfile);
 
         menuAdd.setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(context, AddAnnounceActivity.class);
-            //todo add only if user is logged
-            intent.putExtra("id", connectedUserId);
-            startActivityForResult(intent, 11);
+            if (isConnected()) {
+                Intent intent = new Intent(context, AddAnnounceActivity.class);
+                intent.putExtra("id", connectedUserId);
+                startActivityForResult(intent, REQUEST_CODE_ADD_ANNOUNCE);
+            } else {
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_LOGIN_ADD);
+            }
             return false;
         });
 
         menuProfile.setOnMenuItemClickListener(menuItem -> {
-            //todo: check if user is logged open profile (add, edit and del announce) else open login/register
-            if (connectedUserId <= 0) {
+            if (!isConnected()) {
                 Intent intent = new Intent(context, LoginActivity.class);
-                startActivityForResult(intent, 12);
+                startActivityForResult(intent, REQUEST_CODE_LOGIN_PROFILE);
             } else {
-                //todo: open dashboard
+                Intent intent = new Intent(context, DashboardActivity.class);
+                intent.putExtra("id", connectedUserId);
+                //todo: intent put extra object user with all infos (to be displayed and modified)
+                startActivityForResult(intent, REQUEST_CODE_DASHBOARD);
             }
             return false;
         });
         return true;
+    }
+
+    private boolean isConnected() {
+        return connectedUserId > 0;
     }
 
     @Override
@@ -125,30 +134,24 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         Pair<View, String> p9 = Pair.create(town, "carCategTN");
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-
-        startActivityForResult(intent, 10, optionsCompat.toBundle());
-
+        startActivityForResult(intent, REQUEST_CODE_DETAILS, optionsCompat.toBundle());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 11) {
+        if (requestCode == REQUEST_CODE_ADD_ANNOUNCE) {
             if (resultCode == RESULT_OK) {
                 AnnoucedCars annoucedCars = data.getParcelableExtra("newAnnounce");
                 carsList.add(0, annoucedCars);
                 adapterList.notifyItemInserted(0);
             }
-        } else if (requestCode == 12) {
+        } else if (requestCode == REQUEST_CODE_LOGIN_PROFILE) {
             if (resultCode == RESULT_OK) {
                 connectedUserId = data.getIntExtra("id", 0);
                 //todo: server request to get all user info
                 //todo : launch profile
             }
         }
-    }
-
-    public boolean userIsConnected() {
-        return connectedUser != null;
     }
 }

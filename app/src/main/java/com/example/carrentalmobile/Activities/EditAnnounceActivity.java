@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AddAnnounceActivity extends AppCompatActivity {
+public class EditAnnounceActivity extends AppCompatActivity {
 
     EditText etTitle, etDescription, etSeatCount, etBrand, etCarName, etLocation, etPrice, etCateg;
     Switch cpAvailable;
@@ -66,7 +66,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_announce);
+        setContentView(R.layout.activity_edit_announce);
 
         Intent intent = getIntent();
         int userConnectedId = intent.getIntExtra("id", 0);
@@ -85,6 +85,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
         imgCar = findViewById(R.id.imgAnnounceCar);
 
         context = this;
+
+        //todo: set fields with their values
 
         imgCar.setVisibility(View.INVISIBLE);
         if (checkPermission()) {
@@ -121,7 +123,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 etCarName.setError("Le champ prix doit être strictement positif!");
                 etCarName.requestFocus();
             } else {
-                final ProgressDialog progressDialog = new ProgressDialog(AddAnnounceActivity.this);
+                final ProgressDialog progressDialog = new ProgressDialog(EditAnnounceActivity.this);
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Veuillez patienter");
                 progressDialog.show();
@@ -139,8 +141,9 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 intentReturn.putExtra("newAnnounce", newAnnounce);
                 setResult(RESULT_OK, intentReturn);
                 Api server = RetroFitInstance.getInstance().create((Api.class));
-                Call<ResponseBody> call = server.addAnnounce(
+                Call<ResponseBody> call = server.editAnnounce(
                         (userConnectedId == 0? "":userConnectedId + ""),
+                        "",
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etCarName.getText().toString(),
@@ -155,7 +158,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Ajout réussi!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Modification réussie!", Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(getApplicationContext(), "Erreur d'ajout", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
@@ -163,7 +166,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(AddAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 });
@@ -178,6 +181,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
         inflater.inflate(R.menu.burger_menu, menu);
         menuAdd = menu.findItem(R.id.menuAdd);
         menuProfile = menu.findItem(R.id.menuProfile);
+
         menuHome = menu.findItem(R.id.menuHome);
 
         menuHome.setOnMenuItemClickListener(item -> {
@@ -313,7 +317,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(AddAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

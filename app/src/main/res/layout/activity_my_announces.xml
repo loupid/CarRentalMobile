@@ -6,18 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.MainActivity">
+    tools:context=".Activities.MyAnnouncesActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/voiture_louer"
+        android:text="@string/mes_annonces"
         android:textSize="36sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleView"
+        android:id="@+id/RecycleViewMyAnnounces"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

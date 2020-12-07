@@ -26,6 +26,11 @@ public interface Api {
     @GET
     Call<ResponseBody> download(@Url String url);
 
+    @GET("Php/GetAnnounceInfo.php")
+    Call<ResponseBody> getAnnounceInfo(
+            @Field("idannounce") String idannounce
+    );
+
     @POST("Php/Login.php")
     @FormUrlEncoded
     Call<Integer> login(
@@ -64,5 +69,58 @@ public interface Api {
             @Field("email") String email,
             @Field("password") String password,
             @Field("username") String username
+    );
+
+    //todo: complete the php/js files for:
+    @POST("Php/AddRent.php")
+    @FormUrlEncoded
+    Call<ResponseBody> rent(
+            @Field("iduserowner") String iduserowner,
+            @Field("idannounce") String idannounce
+    );
+
+    @POST("Php/EditUser.php")
+    @FormUrlEncoded
+    Call<ResponseBody> editUser(
+            @Field("firstname") String firstname,
+            @Field("lastname") String lastname,
+            @Field("phonenumber") String phonenumber,
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("username") String username
+    );
+
+    @GET("Php/getMyRents.php")
+    @FormUrlEncoded
+    Call<List<AnnoucedCars>> getMyRents(
+            @Field("iduser") String iduser
+    );
+
+    @GET("Php/GetUserInfo.php")
+    @FormUrlEncoded
+    Call<List<AnnoucedCars>> getUserInfo(
+            @Field("iduser") String iduser
+    );
+
+    @POST("Php/EditAnnounce.php")
+    @FormUrlEncoded
+    Call<ResponseBody> editAnnounce(
+            @Field("iduserowner") String IdUserOwner,
+            @Field("idannounce") String idAnnounce,
+            @Field("title") String title,
+            @Field("brandname") String brand,
+            @Field("carname") String car,
+            @Field("description") String description,
+            @Field("seatcount") String seatcount,
+            @Field("category") String category,
+            @Field("location") String location,
+            @Field("imgfilepath") String imgfilepath,
+            @Field("price") String price,
+            @Field("available") int available);
+
+    @GET("Php/getMyAnnounces.php")
+    @FormUrlEncoded
+    Call<List<AnnoucedCars>> getMyAnnounces(
+            @Field("iduserowner") String iduserowner
     );
 }

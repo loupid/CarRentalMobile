@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Activities.RegisterActivity">
+        tools:context=".Activities.EditUserActivity">
 
         <EditText
-            android:id="@+id/etRegisterFirstname"
+            android:id="@+id/etEditFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -35,7 +35,7 @@
             tools:layout_editor_absoluteY="200dp" />
 
         <EditText
-            android:id="@+id/etRegisterLastname"
+            android:id="@+id/etEditLastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -56,7 +56,7 @@
             tools:layout_editor_absoluteY="250dp" />
 
         <EditText
-            android:id="@+id/etRegisterUsername"
+            android:id="@+id/etEditUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -77,7 +77,7 @@
             tools:layout_editor_absoluteY="299dp" />
 
         <EditText
-            android:id="@+id/etRegisterEmail"
+            android:id="@+id/etEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -98,7 +98,7 @@
             tools:layout_editor_absoluteY="100dp" />
 
         <EditText
-            android:id="@+id/etRegisterPhone"
+            android:id="@+id/etEditPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -119,7 +119,7 @@
             tools:layout_editor_absoluteY="100dp" />
 
         <EditText
-            android:id="@+id/etRegisterPassword"
+            android:id="@+id/etEditPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -140,7 +140,7 @@
             tools:layout_editor_absoluteY="150dp" />
 
         <EditText
-            android:id="@+id/etRegisterConfirmPassword"
+            android:id="@+id/etEditConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -163,7 +163,7 @@
             tools:layout_editor_absoluteY="50dp" />
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -174,7 +174,7 @@
             android:backgroundTint="#ff690f"
             android:drawableTint="#ff690f"
             android:padding="20dp"
-            android:text="S'inscrire"
+            android:text="Modifier"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintVertical_bias="0.0" />

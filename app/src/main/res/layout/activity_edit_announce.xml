@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activities.EditAnnounceActivity">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgAnnounceCarEdit"
+                android:layout_width="match_parent"
+                android:layout_height="209dp"
+                app:srcCompat="@drawable/default_car" />
+
+            <EditText
+                android:id="@+id/etAnnounceTitleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_outline_title_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Titre"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="200dp" />
+
+            <EditText
+                android:id="@+id/etAnnounceBrandEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_outline_directions_car_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Marque"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="250dp" />
+
+            <EditText
+                android:id="@+id/etAnnounceCarNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_outline_directions_car_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Modèle"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="299dp" />
+
+            <EditText
+                android:id="@+id/etAnnounceCategEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_baseline_category_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Catégorie"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="100dp" />
+
+            <EditText
+                android:id="@+id/etAnnounceSeatCountEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_outline_people_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Nombre de siège"
+                android:inputType="number"
+                android:padding="20dp"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="150dp" />
+
+            <EditText
+                android:id="@+id/etAnnounceDescriptionEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:drawableStart="@drawable/ic_outline_comment_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:gravity="start|top"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:singleLine="false"
+                android:textSize="20sp"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="411dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="50dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etAnnounceLocationEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="0.2"
+                android:drawableStart="@drawable/ic_baseline_location_on_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Localisation"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/etAnnouncePriceEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="0.2"
+                android:drawableStart="@drawable/ic_outline_attach_money_24"
+                android:drawableTint="#ff690f"
+                android:ems="10"
+                android:foregroundTint="#ff690f"
+                android:hint="Prix"
+                android:inputType="numberDecimal"
+                android:padding="20dp"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/cpAnnounceAvailableEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="3"
+                android:backgroundTint="#ff690f"
+                android:buttonTint="#ff690f"
+                android:checked="true"
+                android:drawableStart="@drawable/ic_outline_check_box_24"
+                android:drawableTint="#F44336"
+                android:foregroundTint="#ff690f"
+                android:padding="20dp"
+                android:textSize="20sp"
+                android:thumbTint="#ff690f"
+                android:trackTint="#ff690f"
+                tools:checked="true"
+                tools:text="Disponible ?" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAnnounceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#ff690f"
+            android:drawableTint="#ff690f"
+            android:padding="20dp"
+            android:text="@string/modifier"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+</ScrollView>
