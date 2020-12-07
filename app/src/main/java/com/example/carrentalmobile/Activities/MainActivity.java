@@ -140,10 +140,11 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 adapterList.notifyItemInserted(0);
             }
         } else if (requestCode == 12) {
-            connectedUsername = getIntent().getStringExtra("username");
-            connectedUserId = getIntent().getIntExtra("id", 0);
-            //todo: server request to get all user info
-            //todo : launch profile
+            if (resultCode == RESULT_OK) {
+                connectedUserId = data.getIntExtra("id", 0);
+                //todo: server request to get all user info
+                //todo : launch profile
+            }
         }
     }
 

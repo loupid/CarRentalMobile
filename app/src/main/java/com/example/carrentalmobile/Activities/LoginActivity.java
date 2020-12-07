@@ -59,14 +59,15 @@ public class LoginActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        Integer successful = response.body();
-                        if (successful > 0) {
+                        Integer id = response.body();
+                        if (id > 0) {
                             Toast.makeText(getApplicationContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
                             intentReturn.putExtra("username", etUsername.getText().toString());
-                            intentReturn.putExtra("id", successful);
+                            intentReturn.putExtra("id", id);
+                            setResult(RESULT_OK, intentReturn);
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Erreur dans le mot de passe!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Erreur dans le mot de passe ou le nom d'utilisateur!", Toast.LENGTH_SHORT).show();
                         }
                     }
 

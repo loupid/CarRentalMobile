@@ -68,6 +68,9 @@ public class AddAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_announce);
 
+        Intent intent = getIntent();
+        int userConnectedId = intent.getIntExtra("id", 0);
+
         //todo: check edittext id
         etBrand = findViewById(R.id.etAnnounceBrand);
         etTitle = findViewById(R.id.etAnnounceTitle);
@@ -90,8 +93,6 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(v -> {
             Intent intentReturn = new Intent();
-            Intent intent = getIntent();
-            int userConnectedId = intent.getIntExtra("id", 0);
             if (etTitle.getText().toString().equals("")) {
                 etTitle.setError("Le champ titre ne peut pas être vide!");
                 etTitle.requestFocus();
@@ -139,7 +140,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intentReturn);
                 Api server = RetroFitInstance.getInstance().create((Api.class));
                 Call<ResponseBody> call = server.addAnnounce(
-                        userConnectedId + "",
+                        (userConnectedId == 0? "":userConnectedId + ""),
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etCarName.getText().toString(),
@@ -149,7 +150,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                         etLocation.getText().toString(),
                         photoFile.getName(),
                         etPrice.getText().toString(),
-                        cpAvailable.isChecked());
+                        (cpAvailable.isChecked())? 1: 0);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

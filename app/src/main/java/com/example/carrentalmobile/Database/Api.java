@@ -43,7 +43,7 @@ public interface Api {
     @POST("Php/AddAnnounce.php")
     @FormUrlEncoded
     Call<ResponseBody> addAnnounce(
-            @Field("idUserOwner") String IdUserOwner,
+            @Field("iduserowner") String IdUserOwner,
             @Field("title") String title,
             @Field("brandname") String brand,
             @Field("carname") String car,
@@ -53,7 +53,7 @@ public interface Api {
             @Field("location") String location,
             @Field("imgfilepath") String imgfilepath,
             @Field("price") String price,
-            @Field("available") boolean available);
+            @Field("available") int available);
 
     @POST("Php/Register.php")
     @FormUrlEncoded
