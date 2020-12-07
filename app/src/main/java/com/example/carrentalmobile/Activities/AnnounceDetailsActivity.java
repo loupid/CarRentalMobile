@@ -46,7 +46,8 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         loadAnnounceData(annoucedCars);
 
         location.setOnClickListener(v -> {
-            Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+            Intent intent = new Intent(getBaseContext(), MapsActivity2.class);
+            intent.putExtra("address", location.getText().toString());
             startActivity(intent);
         });
     }
