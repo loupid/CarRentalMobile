@@ -1,5 +1,6 @@
 package com.example.carrentalmobile.Database;
 
+import com.example.carrentalmobile.Activities.AnnounceDetailsActivity;
 import com.example.carrentalmobile.Model.AnnoucedCars;
 import com.example.carrentalmobile.Model.LoginResponse;
 import com.example.carrentalmobile.Model.User;
@@ -28,7 +29,7 @@ public interface Api {
     Call<ResponseBody> download(@Url String url);
 
     @GET("Php/GetAnnounceInfo.php")
-    Call<ResponseBody> getAnnounceInfo(
+    Call<AnnoucedCars> getAnnounceInfo(
             @Query("idannounce") String idannounce
     );
 
@@ -72,7 +73,6 @@ public interface Api {
             @Field("username") String username
     );
 
-    //todo: complete the php/js files for:
     @POST("Php/AddRent.php")
     @FormUrlEncoded
     Call<ResponseBody> rent(
@@ -80,6 +80,7 @@ public interface Api {
             @Field("idannounce") String idannounce
     );
 
+    //todo
     @POST("Php/EditUser.php")
     @FormUrlEncoded
     Call<ResponseBody> editUser(
@@ -91,16 +92,18 @@ public interface Api {
             @Field("username") String username
     );
 
-    @GET("Php/getMyRents.php")
+    @GET("Php/GetMyRents.php")
     Call<List<AnnoucedCars>> getMyRents(
-            @Query("iduser") String iduser
+            @Query("iduserclient") String iduserclient
     );
 
+    //todo
     @GET("Php/GetUserInfo.php")
     Call<List<AnnoucedCars>> getUserInfo(
             @Query("iduser") String iduser
     );
 
+    //todo
     @POST("Php/EditAnnounce.php")
     @FormUrlEncoded
     Call<ResponseBody> editAnnounce(
@@ -117,6 +120,7 @@ public interface Api {
             @Field("price") String price,
             @Field("available") int available);
 
+    //todo
     @GET("Php/GetMyAnnounces.php")
     Call<List<AnnoucedCars>> getMyAnnounces(
             @Query("iduserowner") String iduserowner
