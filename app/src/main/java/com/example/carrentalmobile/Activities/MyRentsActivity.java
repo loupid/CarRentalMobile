@@ -39,7 +39,7 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_rents);
 
-        recyclerView = findViewById(R.id.RecycleView);
+        recyclerView = findViewById(R.id.RecycleViewMyRents);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -52,7 +52,8 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
         Api server = RetroFitInstance.getInstance().create(Api.class);
         Intent intent = getIntent();
         int userConnectedId = intent.getIntExtra("id", 0);
-        Call<List<AnnoucedCars>> call = server.getMyAnnounces(userConnectedId + "");
+        Call<List<AnnoucedCars>> call = server.getMyRents(userConnectedId + "");
+
 
         call.enqueue(new Callback<List<AnnoucedCars>>() {
             @Override

@@ -57,15 +57,15 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
         LatLng latLng;
-        if (addressList != null) {
+        if (addressList != null && addressList.size() > 0) {
             address = addressList.get(0);
-            latLng = (addressList.size() > 0) ? new LatLng(address.getLatitude(), address.getLongitude()) : new LatLng(46.3545657, -72.575121);
+            latLng =  new LatLng(address.getLatitude(), address.getLongitude());
         }
         else
             latLng = new LatLng(46.3545657,-72.575121);
 
         // Add a marker in Sydney and move the camera
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Sydney"));
+        mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 }

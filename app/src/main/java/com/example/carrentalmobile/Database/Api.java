@@ -17,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface Api {
@@ -28,7 +29,7 @@ public interface Api {
 
     @GET("Php/GetAnnounceInfo.php")
     Call<ResponseBody> getAnnounceInfo(
-            @Field("idannounce") String idannounce
+            @Query("idannounce") String idannounce
     );
 
     @POST("Php/Login.php")
@@ -91,15 +92,13 @@ public interface Api {
     );
 
     @GET("Php/getMyRents.php")
-    @FormUrlEncoded
     Call<List<AnnoucedCars>> getMyRents(
-            @Field("iduser") String iduser
+            @Query("iduser") String iduser
     );
 
     @GET("Php/GetUserInfo.php")
-    @FormUrlEncoded
     Call<List<AnnoucedCars>> getUserInfo(
-            @Field("iduser") String iduser
+            @Query("iduser") String iduser
     );
 
     @POST("Php/EditAnnounce.php")
@@ -118,9 +117,8 @@ public interface Api {
             @Field("price") String price,
             @Field("available") int available);
 
-    @GET("Php/getMyAnnounces.php")
-    @FormUrlEncoded
+    @GET("Php/GetMyAnnounces.php")
     Call<List<AnnoucedCars>> getMyAnnounces(
-            @Field("iduserowner") String iduserowner
+            @Query("iduserowner") String iduserowner
     );
 }

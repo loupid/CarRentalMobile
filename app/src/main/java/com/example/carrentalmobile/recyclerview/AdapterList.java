@@ -49,6 +49,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         holder.carName.setText(annoucedCarsList.get(position).getCarname());
         holder.title.setText(annoucedCarsList.get(position).getTitle());
         holder.numberPlace.setText(annoucedCarsList.get(position).getSeatcount());
+        //todo: check category
+//        holder.category.setText(annoucedCarsList.get(position).getCategory());
         holder.pricePerDay.setText(annoucedCarsList.get(position).getPrice());
         holder.location.setText(annoucedCarsList.get(position).getLocation());
         holder.brand.setText(annoucedCarsList.get(position).getBrandname());
@@ -81,13 +83,14 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView carName, title, numberPlace, pricePerDay, location, brand, description;
+        TextView carName, title, numberPlace, pricePerDay, location, brand, description, category;
         ImageView imageViewCar, imgContainer;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             carName = itemView.findViewById(R.id.tvCarName);
+            category = itemView.findViewById(R.id.tvCategory);
             title = itemView.findViewById(R.id.tvTitle);
             numberPlace = itemView.findViewById(R.id.tvSeatCount);
             pricePerDay = itemView.findViewById(R.id.tvPrice);
@@ -97,6 +100,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             imageViewCar = itemView.findViewById(R.id.list_car_image);
             imgContainer = itemView.findViewById(R.id.ivCarInfos);
 
+            //todo: open details or edit
             itemView.setOnClickListener(v -> callback.onCarItemClick(getAdapterPosition(), imgContainer, imageViewCar, title, brand, carName, pricePerDay, numberPlace, location, description));
         }
     }
