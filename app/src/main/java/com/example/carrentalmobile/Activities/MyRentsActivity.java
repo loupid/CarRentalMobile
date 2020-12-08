@@ -11,6 +11,7 @@ import retrofit2.Response;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -50,10 +51,9 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
         adapterList = new AdapterList(carsList, this);
 
         Api server = RetroFitInstance.getInstance().create(Api.class);
-        Intent intent = getIntent();
-        int userConnectedId = intent.getIntExtra("id", 0);
-        Call<List<AnnoucedCars>> call = server.getMyRents(userConnectedId + "");
-
+        SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        int connectedUserId = sharedPreferences.getInt("userId", 0);
+        Call<List<AnnoucedCars>> call = server.getMyRents(connectedUserId + "");
 
         call.enqueue(new Callback<List<AnnoucedCars>>() {
             @Override

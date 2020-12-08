@@ -62,7 +62,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             latLng =  new LatLng(address.getLatitude(), address.getLongitude());
         }
         else
-            latLng = new LatLng(46.3545657,-72.575121);
+            latLng = new LatLng(46.3547518,-72.573234);
 
         // Add a marker in Sydney and move the camera
         mMap.addMarker(new MarkerOptions().position(latLng));

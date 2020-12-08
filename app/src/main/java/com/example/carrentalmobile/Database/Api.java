@@ -1,8 +1,6 @@
 package com.example.carrentalmobile.Database;
 
-import com.example.carrentalmobile.Activities.AnnounceDetailsActivity;
 import com.example.carrentalmobile.Model.AnnoucedCars;
-import com.example.carrentalmobile.Model.LoginResponse;
 import com.example.carrentalmobile.Model.User;
 
 import java.util.List;
@@ -11,7 +9,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;

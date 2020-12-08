@@ -18,6 +18,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -55,6 +56,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
     ImageView imgCar;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    int connectedUserId;
 
     String currentPhotoPath;
     MenuItem menuAdd, menuProfile, menuHome;
@@ -68,8 +70,8 @@ public class AddAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_announce);
 
-        Intent intent = getIntent();
-        int userConnectedId = intent.getIntExtra("id", 0);
+        SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        connectedUserId = sharedPreferences.getInt("userId", 0);
 
         //todo: check edittext id
         etBrand = findViewById(R.id.etAnnounceBrand);
@@ -140,7 +142,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intentReturn);
                 Api server = RetroFitInstance.getInstance().create((Api.class));
                 Call<ResponseBody> call = server.addAnnounce(
-                        (userConnectedId == 0? "":userConnectedId + ""),
+                        (connectedUserId == 0? "":connectedUserId + ""),
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etCarName.getText().toString(),

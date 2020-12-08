@@ -2,6 +2,7 @@ package com.example.carrentalmobile.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     List<AnnoucedCars> carsList;
     int connectedUserId = 0;
     User connectedUser;
+    SharedPreferences sharedPreferences;
     final int REQUEST_CODE_LOGIN_ADD = 21, REQUEST_CODE_LOGIN_PROFILE = 12, REQUEST_CODE_DETAILS = 10, REQUEST_CODE_DASHBOARD = 31, REQUEST_CODE_ADD_ANNOUNCE = 11;
 
     @Override
@@ -105,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 startActivityForResult(intent, REQUEST_CODE_LOGIN_PROFILE);
             } else {
                 Intent intent = new Intent(context, DashboardActivity.class);
-                intent.putExtra("id", connectedUserId);
-                //todo: intent put extra object user with all infos (to be displayed and modified)
                 startActivityForResult(intent, REQUEST_CODE_DASHBOARD);
             }
             return false;
@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     }
 
     private boolean isConnected() {
+        sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        connectedUserId = sharedPreferences.getInt("userId", 0);
         return connectedUserId > 0;
     }
 
@@ -148,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
             }
         } else if (requestCode == REQUEST_CODE_LOGIN_PROFILE) {
             if (resultCode == RESULT_OK) {
-                connectedUserId = data.getIntExtra("id", 0);
+                sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+                connectedUserId = sharedPreferences.getInt("userId", 0);
                 //todo: server request to get all user info
                 //todo : launch profile
             }

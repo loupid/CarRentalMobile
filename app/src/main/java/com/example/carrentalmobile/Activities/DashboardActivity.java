@@ -3,6 +3,7 @@ package com.example.carrentalmobile.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -11,7 +12,6 @@ import com.example.carrentalmobile.R;
 public class DashboardActivity extends AppCompatActivity {
 
     Button btnMyAccount, btnMyAnnounces, btnMyLocations, btnDisconnect;
-    int userConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,6 @@ public class DashboardActivity extends AppCompatActivity {
         btnMyLocations = findViewById(R.id.btnMyLocations);
         btnDisconnect = findViewById(R.id.btnDisconnect);
 
-        Intent getIntent = getIntent();
-        userConnected = getIntent.getIntExtra("id", 0);
-
         btnMyAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), EditUserActivity.class);
             //todo: intent put extra user info (to set the edit texts)
@@ -34,16 +31,20 @@ public class DashboardActivity extends AppCompatActivity {
 
         btnMyAnnounces.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), MyAnnouncesActivity.class);
-            intent.putExtra("id", userConnected);
             startActivity(intent);
         });
 
         btnMyLocations.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), MyRentsActivity.class);
-            intent.putExtra("id", userConnected);
             startActivity(intent);
         });
 
-        btnDisconnect.setOnClickListener(v -> finish());
+        btnDisconnect.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("userId", 0);
+            editor.apply();
+            finish();
+        });
     }
 }
