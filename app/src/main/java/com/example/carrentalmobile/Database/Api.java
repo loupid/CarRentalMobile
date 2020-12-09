@@ -100,11 +100,9 @@ public interface Api {
             @Query("iduser") String iduser
     );
 
-    //todo
     @POST("Php/EditAnnounce.php")
     @FormUrlEncoded
     Call<ResponseBody> editAnnounce(
-            @Field("iduserowner") String IdUserOwner,
             @Field("idannounce") String idAnnounce,
             @Field("title") String title,
             @Field("brandname") String brand,

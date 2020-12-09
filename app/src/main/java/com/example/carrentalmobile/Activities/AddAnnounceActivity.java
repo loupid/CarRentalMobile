@@ -198,7 +198,11 @@ public class AddAnnounceActivity extends AppCompatActivity {
 
     public void launchProgram() {
         imgCar.setVisibility(View.VISIBLE);
-
+        try {
+            photoFile = createPhotoFile();
+        } catch (IOException exception) {
+            Toast.makeText(AddAnnounceActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         imgCar.setOnClickListener(view -> launchCamera());
     }
 
@@ -213,6 +217,7 @@ public class AddAnnounceActivity extends AppCompatActivity {
                 photoFile = createPhotoFile();
             } catch (IOException ex) {
                 // gestion d'erreur eventuelle lors de la création du fichier
+
             }
             // on continue si le fichier est créé correctement
             if (photoFile != null) {
