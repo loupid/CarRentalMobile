@@ -73,21 +73,6 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
 
     @Override
     public void onCarItemClick(int pos, ImageView imgContainer, ImageView imgCar, TextView title, TextView brand, TextView name, TextView price, TextView seatCount, TextView town, TextView description) {
-        Intent intent = new Intent(getBaseContext(), AnnounceDetailsActivity.class);
-        intent.putExtra("carAnnounce", carsList.get(pos));
 
-        Pair<View, String> p1 = Pair.create(imgContainer, "containerTN");
-        Pair<View, String> p2 = Pair.create(imgCar, "carTN");
-        Pair<View, String> p3 = Pair.create(title, "carTitleTN");
-        Pair<View, String> p4 = Pair.create(brand, "carBrandTN");
-        Pair<View, String> p5 = Pair.create(name, "carNameTN");
-        Pair<View, String> p6 = Pair.create(seatCount, "carSeatCoutTN");
-        Pair<View, String> p7 = Pair.create(price, "carPriceTN");
-        Pair<View, String> p8 = Pair.create(town, "carTownTN");
-        Pair<View, String> p9 = Pair.create(town, "carCategTN");
-
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-
-        startActivityForResult(intent, 10, optionsCompat.toBundle());
     }
 }

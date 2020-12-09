@@ -11,6 +11,7 @@ import retrofit2.Response;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -50,9 +51,9 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
         adapterList = new AdapterList(carsList, this);
 
         Api server = RetroFitInstance.getInstance().create(Api.class);
-        Intent intent = getIntent();
-        int userConnectedId = intent.getIntExtra("id", 0);
-        Call<List<AnnoucedCars>> call = server.getMyAnnounces(userConnectedId + "");
+        SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        int connectedUserId = sharedPreferences.getInt("userId", 0);
+        Call<List<AnnoucedCars>> call = server.getMyAnnounces(connectedUserId + "");
 
         call.enqueue(new Callback<List<AnnoucedCars>>() {
             @Override
@@ -72,8 +73,8 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
 
     @Override
     public void onCarItemClick(int pos, ImageView imgContainer, ImageView imgCar, TextView title, TextView brand, TextView name, TextView price, TextView seatCount, TextView town, TextView description) {
-        Intent intent = new Intent(getBaseContext(), AnnounceDetailsActivity.class);
-        intent.putExtra("carAnnounce", carsList.get(pos));
+        Intent intent = new Intent(getBaseContext(), EditAnnounceActivity.class);
+        intent.putExtra("carAnnounceId", carsList.get(pos).getIdannounce());
 
         Pair<View, String> p1 = Pair.create(imgContainer, "containerTN");
         Pair<View, String> p2 = Pair.create(imgCar, "carTN");

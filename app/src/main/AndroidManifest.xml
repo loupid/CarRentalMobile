@@ -55,8 +55,7 @@
             android:name=".Activities.AddAnnounceActivity"
             android:parentActivityName=".Activities.MainActivity"/>
         <activity
-            android:name=".Activities.AnnounceDetailsActivity"
-            android:parentActivityName=".Activities.MainActivity"/>
+            android:name=".Activities.AnnounceDetailsActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

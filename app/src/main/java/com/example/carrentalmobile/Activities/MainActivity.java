@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
         menuAdd.setOnMenuItemClickListener(item -> {
             if (isConnected()) {
                 Intent intent = new Intent(context, AddAnnounceActivity.class);
-                intent.putExtra("id", connectedUserId);
                 startActivityForResult(intent, REQUEST_CODE_ADD_ANNOUNCE);
             } else {
                 Intent intent = new Intent(context, LoginActivity.class);

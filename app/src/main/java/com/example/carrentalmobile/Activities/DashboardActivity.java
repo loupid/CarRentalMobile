@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.carrentalmobile.R;
@@ -12,6 +15,7 @@ import com.example.carrentalmobile.R;
 public class DashboardActivity extends AppCompatActivity {
 
     Button btnMyAccount, btnMyAnnounces, btnMyLocations, btnDisconnect;
+    MenuItem menuAdd, menuHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,4 +51,25 @@ public class DashboardActivity extends AppCompatActivity {
             finish();
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuHome = menu.findItem(R.id.menuHome);
+
+        menuAdd.setOnMenuItemClickListener(item -> {
+                Intent intent = new Intent(getBaseContext(), AddAnnounceActivity.class);
+                startActivity(intent);
+            return false;
+        });
+
+        menuHome.setOnMenuItemClickListener(menuItem -> {
+            finish();
+            return false;
+        });
+        return true;
+    }
+
 }

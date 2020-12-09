@@ -18,6 +18,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,13 +52,14 @@ public class EditAnnounceActivity extends AppCompatActivity {
 
     EditText etTitle, etDescription, etSeatCount, etBrand, etCarName, etLocation, etPrice, etCateg;
     Switch cpAvailable;
-    Button btnAdd;
+    Button btnEdit;
     ImageView imgCar;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     String currentPhotoPath;
     MenuItem menuAdd, menuProfile, menuHome;
+    AnnoucedCars annoucedCars;
 
     Context context;
 
@@ -68,32 +70,73 @@ public class EditAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_announce);
 
-        Intent intent = getIntent();
-        int userConnectedId = intent.getIntExtra("id", 0);
+        SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        int connectedUserId = sharedPreferences.getInt("userId", 0);
 
-        //todo: check edittext id
-        etBrand = findViewById(R.id.etAnnounceBrand);
-        etTitle = findViewById(R.id.etAnnounceTitle);
-        etDescription = findViewById(R.id.etAnnounceDescription);
-        etSeatCount = findViewById(R.id.etAnnounceSeatCount);
-        etCarName = findViewById(R.id.etAnnounceCarName);
-        etLocation = findViewById(R.id.etAnnounceLocation);
-        etPrice = findViewById(R.id.etAnnouncePrice);
-        etCateg = findViewById(R.id.etAnnounceCateg);
-        btnAdd = findViewById(R.id.btnAnnounceAdd);
-        cpAvailable = findViewById(R.id.cpAnnounceAvailable);
-        imgCar = findViewById(R.id.imgAnnounceCar);
+        etBrand = findViewById(R.id.etAnnounceBrandEdit);
+        etTitle = findViewById(R.id.etAnnounceTitleEdit);
+        etDescription = findViewById(R.id.etAnnounceDescriptionEdit);
+        etSeatCount = findViewById(R.id.etAnnounceSeatCountEdit);
+        etCarName = findViewById(R.id.etAnnounceCarNameEdit);
+        etLocation = findViewById(R.id.etAnnounceLocationEdit);
+        etPrice = findViewById(R.id.etAnnouncePriceEdit);
+        etCateg = findViewById(R.id.etAnnounceCategEdit);
+        btnEdit = findViewById(R.id.btnAnnounceEdit);
+        cpAvailable = findViewById(R.id.cpAnnounceAvailableEdit);
+        imgCar = findViewById(R.id.imgAnnounceCarEdit);
 
         context = this;
 
-        //todo: set fields with their values
+        Api server = RetroFitInstance.getInstance().create((Api.class));
+        Intent intent = getIntent();
+        String idAnnounce = intent.getStringExtra("carAnnounceId");
+        Call<AnnoucedCars> callGetAnnounceInfo = server.getAnnounceInfo(idAnnounce);
+        callGetAnnounceInfo.enqueue(new Callback<AnnoucedCars>() {
+            @Override
+            public void onResponse(Call<AnnoucedCars> call, Response<AnnoucedCars> response) {
+                annoucedCars = response.body();
+                etBrand.setText(annoucedCars.getBrandname());
+                etTitle.setText(annoucedCars.getTitle());
+                etDescription.setText(annoucedCars.getDescription());
+                etSeatCount.setText(annoucedCars.getSeatcount());
+                etCarName.setText(annoucedCars.getCarname());
+                etLocation.setText(annoucedCars.getLocation());
+                etPrice.setText(annoucedCars.getPrice().replace(" $/jour",""));
+                etCateg.setText(annoucedCars.getBrandname());
+
+                Call<ResponseBody> callDownloadImg = server.download(annoucedCars.getFilepath());
+                callDownloadImg.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
+                                imgCar.setImageBitmap(bmp);
+                            } else {
+                                imgCar.setImageResource(R.drawable.default_car);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        imgCar.setImageResource(R.drawable.default_car);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<AnnoucedCars> call, Throwable t) {
+                Toast.makeText(EditAnnounceActivity.this, "Erreur de connexion au serveur", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         imgCar.setVisibility(View.INVISIBLE);
         if (checkPermission()) {
             launchProgram();
         }
 
-        btnAdd.setOnClickListener(v -> {
+        btnEdit.setOnClickListener(v -> {
             Intent intentReturn = new Intent();
             if (etTitle.getText().toString().equals("")) {
                 etTitle.setError("Le champ titre ne peut pas être vide!");
@@ -138,12 +181,11 @@ public class EditAnnounceActivity extends AppCompatActivity {
                         photoFile.getName(),
                         cpAvailable.isChecked(),
                         etPrice.getText().toString());
+                newAnnounce.setIdannounce(annoucedCars.getIdannounce());
                 intentReturn.putExtra("newAnnounce", newAnnounce);
                 setResult(RESULT_OK, intentReturn);
-                Api server = RetroFitInstance.getInstance().create((Api.class));
-                Call<ResponseBody> call = server.editAnnounce(
-                        (userConnectedId == 0? "":userConnectedId + ""),
-                        "",
+                Call<ResponseBody> callEdit = server.editAnnounce(
+                        annoucedCars.getIdannounce(),
                         etTitle.getText().toString(),
                         etBrand.getText().toString(),
                         etCarName.getText().toString(),
@@ -154,7 +196,7 @@ public class EditAnnounceActivity extends AppCompatActivity {
                         photoFile.getName(),
                         etPrice.getText().toString(),
                         (cpAvailable.isChecked())? 1: 0);
-                call.enqueue(new Callback<ResponseBody>() {
+                callEdit.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
@@ -200,7 +242,11 @@ public class EditAnnounceActivity extends AppCompatActivity {
 
     public void launchProgram() {
         imgCar.setVisibility(View.VISIBLE);
-
+        try {
+            photoFile = createPhotoFile();
+        } catch (IOException exception) {
+            Toast.makeText(EditAnnounceActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         imgCar.setOnClickListener(view -> launchCamera());
     }
 
