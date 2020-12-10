@@ -60,25 +60,29 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
             Api server = RetroFitInstance.getInstance().create((Api.class));
             SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
             int connectedUserId = sharedPreferences.getInt("userId", 0);
-            Call<ResponseBody> rentCall = server.rent(connectedUserId + "", annoucedCars.getIdannounce());
-            rentCall.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful()) {
-                        Intent intentReturn = new Intent();
-                        intentReturn.putExtra("rented", true);
+            if (connectedUserId > 0){
+                Call<ResponseBody> rentCall = server.rent(connectedUserId + "", annoucedCars.getIdannounce());
+                rentCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Intent intentReturn = new Intent();
+                            intentReturn.putExtra("rented", true);
 
-                        setResult(RESULT_OK, intentReturn);
-                        finish();
+                            setResult(RESULT_OK, intentReturn);
+                            finish();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                }
-            });
-
+                    }
+                });
+            }else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -98,7 +102,6 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
         pricePerDay.setText(annoucedCars.getPrice());
         location.setText(annoucedCars.getLocation());
         brand.setText(annoucedCars.getBrandname());
-        description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         Api server = RetroFitInstance.getInstance().create(Api.class);
         Call<AnnoucedCars> callGetAnnounceInfo = server.getAnnounceInfo(annoucedCars.getIdannounce());
         callGetAnnounceInfo.enqueue(new Callback<AnnoucedCars>() {
@@ -107,7 +110,7 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
                 details = response.body();
                 if (response.isSuccessful()) {
                     category.setText(details.getCategory());
-                    description.setText(annoucedCars.getDescription());
+                    description.setText(details.getDescription());
                 } else {
                     category.setText("Catégorie");
                     description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
