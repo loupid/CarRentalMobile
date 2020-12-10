@@ -5,14 +5,19 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +39,8 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
     AdapterList adapterList;
     List<AnnoucedCars> carsList;
     Context context;
+
+    MenuItem menuAdd, menuHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,27 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuHome = menu.findItem(R.id.menuHome);
+
+        menuHome.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            return false;
+        });
+
+        menuAdd.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(getApplicationContext(), AddAnnounceActivity.class);
+            startActivity(intent);
+            return false;
+        });
+        return true;
+    }
+
+    @Override
     public void onCarItemClick(int pos, ImageView imgContainer, ImageView imgCar, TextView title, TextView brand, TextView name, TextView price, TextView seatCount, TextView town, TextView description) {
         Intent intent = new Intent(getBaseContext(), EditAnnounceActivity.class);
         intent.putExtra("carAnnounceId", carsList.get(pos).getIdannounce());
@@ -89,5 +117,27 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
 
         startActivityForResult(intent, 100, optionsCompat.toBundle());
+    }
+
+    @Override
+    public void onCarLongPressClick(int pos) {
+        new AlertDialog.Builder(context).setTitle("Supprimer une annonce")
+                .setMessage("Voulez-vous vraiement supprimer l'annonce?")
+                .setPositiveButton("Oui", (dialog, which) -> {
+                    Api server = RetroFitInstance.getInstance().create((Api.class));
+                    Call<ResponseBody> call = server.removeAnnounce(carsList.get(pos).getIdannounce());
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            carsList.remove(pos);
+                            adapterList.notifyItemRemoved(pos);
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
+                }).setNegativeButton("Non", null).setIcon(android.R.drawable.ic_menu_delete).show();
     }
 }

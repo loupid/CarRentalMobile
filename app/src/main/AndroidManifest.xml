@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarRentalMobile"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.MyRentMyAnnounceActivity"></activity>
         <activity
             android:name=".Activities.EditAnnounceActivity"
             android:parentActivityName=".Activities.MyAnnouncesActivity" />
@@ -24,7 +25,7 @@
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.EditUserActivity"
-            android:parentActivityName=".Activities.DashboardActivity"/>
+            android:parentActivityName=".Activities.DashboardActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,7 +37,7 @@
         <activity
             android:name=".Activities.MapsActivity2"
             android:label="@string/title_activity_maps2"
-            android:parentActivityName=".Activities.AnnounceDetailsActivity"/>
+            android:parentActivityName=".Activities.AnnounceDetailsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -47,15 +48,14 @@
         -->
         <activity
             android:name=".Activities.RegisterActivity"
-            android:parentActivityName=".Activities.MainActivity"/>
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:parentActivityName=".Activities.MainActivity"/>
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.AddAnnounceActivity"
-            android:parentActivityName=".Activities.MainActivity"/>
-        <activity
-            android:name=".Activities.AnnounceDetailsActivity" />
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity android:name=".Activities.AnnounceDetailsActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,12 +85,12 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

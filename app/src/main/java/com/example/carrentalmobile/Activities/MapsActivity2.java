@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.carrentalmobile.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +25,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
         String location;
+        MenuItem menuAdd, menuProfile, menuHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,35 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
         location = intent.getStringExtra("address");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuProfile = menu.findItem(R.id.menuProfile);
+        menuHome = menu.findItem(R.id.menuHome);
+
+        menuHome.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            return false;
+        });
+
+        menuProfile.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(intent);
+            return false;
+        });
+
+        menuAdd.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(getApplicationContext(), AddAnnounceActivity.class);
+            startActivity(intent);
+            return false;
+        });
+
+        return true;
     }
 
     /**

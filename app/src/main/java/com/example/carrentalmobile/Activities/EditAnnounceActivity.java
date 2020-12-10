@@ -70,9 +70,6 @@ public class EditAnnounceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_announce);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
-        int connectedUserId = sharedPreferences.getInt("userId", 0);
-
         etBrand = findViewById(R.id.etAnnounceBrandEdit);
         etTitle = findViewById(R.id.etAnnounceTitleEdit);
         etDescription = findViewById(R.id.etAnnounceDescriptionEdit);

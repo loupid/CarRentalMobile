@@ -37,6 +37,18 @@ public interface Api {
             @Field("password") String password
     );
 
+    @POST("Php/RemoveRent.php")
+    @FormUrlEncoded
+    Call<ResponseBody> cancelRent(
+            @Field("idannounce") String idannounce
+    );
+
+    @POST("Php/RemoveAnnounce.php")
+    @FormUrlEncoded
+    Call<ResponseBody> removeAnnounce(
+            @Field("idannounce") String idannounce
+    );
+
     @Multipart
     @POST("Php/Upload.php")
     Call<ResponseBody> upload(

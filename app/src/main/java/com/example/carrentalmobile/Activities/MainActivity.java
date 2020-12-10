@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     MenuItem menuAdd, menuProfile;
     Context context;
     List<AnnoucedCars> carsList;
-    int connectedUserId = 0;
+    int connectedUserId = 0, indexRent;
     User connectedUser;
     SharedPreferences sharedPreferences;
     final int REQUEST_CODE_LOGIN_ADD = 21, REQUEST_CODE_LOGIN_PROFILE = 12, REQUEST_CODE_DETAILS = 10, REQUEST_CODE_DASHBOARD = 31, REQUEST_CODE_ADD_ANNOUNCE = 11;
@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     @Override
     public void onCarItemClick(int pos, ImageView imgContainer, ImageView imgCar, TextView title, TextView brand, TextView name, TextView price, TextView seatCount, TextView town, TextView description) {
         Intent intent = new Intent(getBaseContext(), AnnounceDetailsActivity.class);
+        indexRent = pos;
         intent.putExtra("carAnnounce", carsList.get(pos));
 
         Pair<View, String> p1 = Pair.create(imgContainer, "containerTN");
@@ -139,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     }
 
     @Override
+    public void onCarLongPressClick(int pos) {
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ADD_ANNOUNCE) {
@@ -153,6 +159,13 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
                 connectedUserId = sharedPreferences.getInt("userId", 0);
                 //todo: server request to get all user info
                 //todo : launch profile
+            }
+        } else if (requestCode == REQUEST_CODE_DETAILS) {
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("rented", false)) {
+                    carsList.remove(indexRent);
+                    adapterList.notifyItemRemoved(indexRent);
+                }
             }
         }
     }

@@ -15,4 +15,6 @@ public interface CarCallback {
                         TextView seatCount,
                         TextView town,
                         TextView description);
+
+    void onCarLongPressClick(int pos);
 }

@@ -1,5 +1,8 @@
 package com.example.carrentalmobile.recyclerview;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -29,6 +32,11 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     CarCallback callback;
 
     public AdapterList(List<AnnoucedCars> annoucedCarsList, CarCallback callback) {
+        this.annoucedCarsList = annoucedCarsList;
+        this.callback = callback;
+    }
+
+    public AdapterList(List<AnnoucedCars> annoucedCarsList, CarCallback callback, Context context) {
         this.annoucedCarsList = annoucedCarsList;
         this.callback = callback;
     }
@@ -100,8 +108,13 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
             imageViewCar = itemView.findViewById(R.id.list_car_image);
             imgContainer = itemView.findViewById(R.id.ivCarInfos);
 
-            //todo: open details or edit
             itemView.setOnClickListener(v -> callback.onCarItemClick(getAdapterPosition(), imgContainer, imageViewCar, title, brand, carName, pricePerDay, numberPlace, location, description));
+
+            itemView.setOnLongClickListener(v ->
+            {
+                callback.onCarLongPressClick(getAdapterPosition());
+                return false;
+            });
         }
     }
 }
