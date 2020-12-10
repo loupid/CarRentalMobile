@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -98,7 +99,7 @@ public class EditAnnounceActivity extends AppCompatActivity {
                 etSeatCount.setText(annoucedCars.getSeatcount());
                 etCarName.setText(annoucedCars.getCarname());
                 etLocation.setText(annoucedCars.getLocation());
-                etPrice.setText(annoucedCars.getPrice().replace(" $/jour",""));
+                etPrice.setText(annoucedCars.getPrice().replace(" $/jour", ""));
                 etCateg.setText(annoucedCars.getBrandname());
 
                 Call<ResponseBody> callDownloadImg = server.download(annoucedCars.getFilepath());
@@ -134,84 +135,92 @@ public class EditAnnounceActivity extends AppCompatActivity {
         }
 
         btnEdit.setOnClickListener(v -> {
-            Intent intentReturn = new Intent();
-            if (etTitle.getText().toString().equals("")) {
-                etTitle.setError("Le champ titre ne peut pas être vide!");
-                etTitle.requestFocus();
-            } else if (etBrand.getText().toString().equals("")) {
-                etBrand.setError("Le champ marque ne peut pas être vide!");
-                etBrand.requestFocus();
-            } else if (etCarName.getText().toString().equals("")) {
-                etCarName.setError("Le champ modèle ne peut pas être vide!");
-                etCarName.requestFocus();
-            } else if (etCateg.getText().toString().equals("")) {
-                etCateg.setError("Le champ catégorie ne peut pas être vide!");
-                etCateg.requestFocus();
-            } else if (etLocation.getText().toString().equals("")) {
-                etLocation.setError("Le champ localisation ne peut pas être vide!");
-                etLocation.requestFocus();
-            } else if (etSeatCount.getText().toString().equals("")) {
-                etSeatCount.setError("Le champ nombre de passager ne peut pas être vide!");
-                etSeatCount.requestFocus();
-            } else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0) {
-                etSeatCount.setError("Le champ nombre de passager doit être strictement positif!");
-                etSeatCount.requestFocus();
-            } else if (etPrice.getText().toString().equals("")) {
-                etPrice.setError("Le champ prix ne peut pas être vide!");
-                etPrice.requestFocus();
-            } else if (Double.parseDouble(etPrice.getText().toString()) <= 0) {
-                etCarName.setError("Le champ prix doit être strictement positif!");
-                etCarName.requestFocus();
-            } else {
-                final ProgressDialog progressDialog = new ProgressDialog(EditAnnounceActivity.this);
-                progressDialog.setCancelable(false);
-                progressDialog.setMessage("Veuillez patienter");
-                progressDialog.show();
-                AnnoucedCars newAnnounce = new AnnoucedCars(
-                        etTitle.getText().toString(),
-                        etBrand.getText().toString(),
-                        etLocation.getText().toString(),
-                        etCarName.getText().toString(),
-                        etSeatCount.getText().toString(),
-                        etCateg.getText().toString(),
-                        etDescription.getText().toString(),
-                        photoFile.getName(),
-                        cpAvailable.isChecked(),
-                        etPrice.getText().toString());
-                newAnnounce.setIdannounce(annoucedCars.getIdannounce());
-                intentReturn.putExtra("newAnnounce", newAnnounce);
-                setResult(RESULT_OK, intentReturn);
-                Call<ResponseBody> callEdit = server.editAnnounce(
-                        annoucedCars.getIdannounce(),
-                        etTitle.getText().toString(),
-                        etBrand.getText().toString(),
-                        etCarName.getText().toString(),
-                        etDescription.getText().toString(),
-                        etSeatCount.getText().toString(),
-                        etCateg.getText().toString(),
-                        etLocation.getText().toString(),
-                        photoFile.getName(),
-                        etPrice.getText().toString(),
-                        (cpAvailable.isChecked())? 1: 0);
-                callEdit.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Modification réussie!", Toast.LENGTH_SHORT).show();
-                        } else
-                            Toast.makeText(getApplicationContext(), "Erreur d'ajout", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(EditAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                });
-                finish();
-            }
+            new AlertDialog.Builder(context).setTitle("Modifier une annonce")
+                    .setMessage("Voulez-vous vraiement modifier l'annonce?")
+                    .setPositiveButton("Oui", (dialog, which) -> {
+
+                        Intent intentReturn = new Intent();
+                        if (etTitle.getText().toString().equals("")) {
+                            etTitle.setError("Le champ titre ne peut pas être vide!");
+                            etTitle.requestFocus();
+                        } else if (etBrand.getText().toString().equals("")) {
+                            etBrand.setError("Le champ marque ne peut pas être vide!");
+                            etBrand.requestFocus();
+                        } else if (etCarName.getText().toString().equals("")) {
+                            etCarName.setError("Le champ modèle ne peut pas être vide!");
+                            etCarName.requestFocus();
+                        } else if (etCateg.getText().toString().equals("")) {
+                            etCateg.setError("Le champ catégorie ne peut pas être vide!");
+                            etCateg.requestFocus();
+                        } else if (etLocation.getText().toString().equals("")) {
+                            etLocation.setError("Le champ localisation ne peut pas être vide!");
+                            etLocation.requestFocus();
+                        } else if (etSeatCount.getText().toString().equals("")) {
+                            etSeatCount.setError("Le champ nombre de passager ne peut pas être vide!");
+                            etSeatCount.requestFocus();
+                        } else if (Integer.parseInt(etSeatCount.getText().toString()) <= 0) {
+                            etSeatCount.setError("Le champ nombre de passager doit être strictement positif!");
+                            etSeatCount.requestFocus();
+                        } else if (etPrice.getText().toString().equals("")) {
+                            etPrice.setError("Le champ prix ne peut pas être vide!");
+                            etPrice.requestFocus();
+                        } else if (Double.parseDouble(etPrice.getText().toString()) <= 0) {
+                            etCarName.setError("Le champ prix doit être strictement positif!");
+                            etCarName.requestFocus();
+                        } else {
+                            final ProgressDialog progressDialog = new ProgressDialog(EditAnnounceActivity.this);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("Veuillez patienter");
+                            progressDialog.show();
+                            AnnoucedCars newAnnounce = new AnnoucedCars(
+                                    etTitle.getText().toString(),
+                                    etBrand.getText().toString(),
+                                    etLocation.getText().toString(),
+                                    etCarName.getText().toString(),
+                                    etSeatCount.getText().toString(),
+                                    etCateg.getText().toString(),
+                                    etDescription.getText().toString(),
+                                    photoFile.getName(),
+                                    cpAvailable.isChecked(),
+                                    etPrice.getText().toString());
+                            newAnnounce.setIdannounce(annoucedCars.getIdannounce());
+                            intentReturn.putExtra("newAnnounce", newAnnounce);
+                            setResult(RESULT_OK, intentReturn);
+                            Call<ResponseBody> callEdit = server.editAnnounce(
+                                    annoucedCars.getIdannounce(),
+                                    etTitle.getText().toString(),
+                                    etBrand.getText().toString(),
+                                    etCarName.getText().toString(),
+                                    etDescription.getText().toString(),
+                                    etSeatCount.getText().toString(),
+                                    etCateg.getText().toString(),
+                                    etLocation.getText().toString(),
+                                    photoFile.getName(),
+                                    etPrice.getText().toString(),
+                                    (cpAvailable.isChecked()) ? 1 : 0);
+                            callEdit.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "Modification réussie!", Toast.LENGTH_SHORT).show();
+                                    } else
+                                        Toast.makeText(getApplicationContext(), "Erreur d'ajout", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Toast.makeText(EditAnnounceActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+                            });
+                            finish();
+                        }
+
+                    }).setNegativeButton("Non", null).setIcon(android.R.drawable.ic_menu_delete).show();
         });
+
     }
 
     @Override

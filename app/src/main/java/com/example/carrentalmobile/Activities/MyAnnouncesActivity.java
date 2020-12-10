@@ -1,5 +1,6 @@
 package com.example.carrentalmobile.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
@@ -40,7 +41,7 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
     List<AnnoucedCars> carsList;
     Context context;
     TextView tvMyAnnounces;
-
+    int indexCarReturned;
     MenuItem menuAdd, menuHome;
 
     @Override
@@ -102,7 +103,7 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
 
         menuAdd.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(getApplicationContext(), AddAnnounceActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1010);
             return false;
         });
         return true;
@@ -125,7 +126,7 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
 
-        startActivityForResult(intent, 100, optionsCompat.toBundle());
+        startActivityForResult(intent, 1000, optionsCompat.toBundle());
     }
 
     @Override
@@ -138,6 +139,7 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            indexCarReturned = pos;
                             carsList.remove(pos);
                             adapterList.notifyItemRemoved(pos);
                         }
@@ -148,5 +150,22 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
                         }
                     });
                 }).setNegativeButton("Non", null).setIcon(android.R.drawable.ic_menu_delete).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == RESULT_OK && carsList != null) {
+            carsList.remove(indexCarReturned);
+            adapterList.notifyItemChanged(indexCarReturned);
+            if (carsList.isEmpty()) {
+                tvMyAnnounces.setTextSize(20);
+                tvMyAnnounces.setText("Vous n'avez pas d'annonces!");
+            }
+        } else if (requestCode == 1010 && resultCode == RESULT_OK) {
+            AnnoucedCars annoucedCars = data.getParcelableExtra("newAnnounce");
+            carsList.add(0, annoucedCars);
+            adapterList.notifyItemInserted(0);
+        }
     }
 }
