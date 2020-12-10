@@ -39,6 +39,7 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
     AdapterList adapterList;
     List<AnnoucedCars> carsList;
     Context context;
+    TextView tvMyRents;
 
     MenuItem menuAdd, menuHome;
 
@@ -53,6 +54,10 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
 
         recyclerView.setItemAnimator(new ItemAnimator());
 
+        tvMyRents = findViewById(R.id.tvMyRents);
+        tvMyRents.setTextSize(32);
+        tvMyRents.setText("Mes locations");
+
         context = this;
 
         adapterList = new AdapterList(carsList, this);
@@ -66,9 +71,14 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
             @Override
             public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 carsList = response.body();
-                adapterList.setAnnoucedCarsList(carsList);
-                adapterList.notifyDataSetChanged();
-                recyclerView.setAdapter(adapterList);
+                if (carsList != null) {
+                    adapterList.setAnnoucedCarsList(carsList);
+                    adapterList.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapterList);
+                } else {
+                    tvMyRents.setTextSize(20);
+                    tvMyRents.setText("Vous n'avez pas de locations!");
+                }
             }
 
             @Override
@@ -101,8 +111,8 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
 
     @Override
     public void onCarItemClick(int pos, ImageView imgContainer, ImageView imgCar, TextView title, TextView brand, TextView name, TextView price, TextView seatCount, TextView town, TextView description) {
-        Intent intent = new Intent(getBaseContext(), MyRentMyAnnounceActivity.class);
-        intent.putExtra("carAnnounceId", carsList.get(pos).getIdannounce());
+        Intent intent = new Intent(getBaseContext(), MyRentDetailsActivity.class);
+        intent.putExtra("carAnnounce", carsList.get(pos));
 
         Pair<View, String> p1 = Pair.create(imgContainer, "containerTN");
         Pair<View, String> p2 = Pair.create(imgCar, "carTN");

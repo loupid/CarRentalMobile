@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
     Context context;
     List<AnnoucedCars> carsList;
     int connectedUserId = 0, indexRent;
-    User connectedUser;
+    TextView tvMain;
     SharedPreferences sharedPreferences;
     final int REQUEST_CODE_LOGIN_ADD = 21, REQUEST_CODE_LOGIN_PROFILE = 12, REQUEST_CODE_DETAILS = 10, REQUEST_CODE_DASHBOARD = 31, REQUEST_CODE_ADD_ANNOUNCE = 11;
 
@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
 
         context = this;
 
+        tvMain = findViewById(R.id.tvMain);
+
+        tvMain.setTextSize(32);
+        tvMain.setText("Locations de véhicules");
+
         adapterList = new AdapterList(carsList, this);
 
         Api server = RetroFitInstance.getInstance().create(Api.class);
@@ -70,9 +75,14 @@ public class MainActivity extends AppCompatActivity implements CarCallback {
             @Override
             public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 carsList = response.body();
-                adapterList.setAnnoucedCarsList(carsList);
-                adapterList.notifyDataSetChanged();
-                recyclerView.setAdapter(adapterList);
+                if (carsList != null) {
+                    adapterList.setAnnoucedCarsList(carsList);
+                    adapterList.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapterList);
+                } else {
+                    tvMain.setTextSize(20);
+                    tvMain.setText("Aucun véhicule n'est disponible en location!");
+                }
             }
 
             @Override

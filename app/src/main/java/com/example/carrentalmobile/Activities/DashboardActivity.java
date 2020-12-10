@@ -29,7 +29,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         btnMyAccount.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), EditUserActivity.class);
-            //todo: intent put extra user info (to set the edit texts)
             startActivity(intent);
         });
 

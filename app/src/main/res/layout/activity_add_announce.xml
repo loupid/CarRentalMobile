@@ -202,6 +202,8 @@
                     android:drawableTint="#F44336"
                     android:foregroundTint="#ff690f"
                     android:padding="20dp"
+                    android:showText="false"
+                    android:text="Disponible ?"
                     android:textSize="20sp"
                     android:thumbTint="#ff690f"
                     android:trackTint="#ff690f"

@@ -39,6 +39,7 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
     AdapterList adapterList;
     List<AnnoucedCars> carsList;
     Context context;
+    TextView tvMyAnnounces;
 
     MenuItem menuAdd, menuHome;
 
@@ -53,6 +54,9 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
 
         recyclerView.setItemAnimator(new ItemAnimator());
 
+        tvMyAnnounces = findViewById(R.id.tvMyAnnounces);
+        tvMyAnnounces.setTextSize(32);
+        tvMyAnnounces.setText("Mes annonces");
         context = this;
 
         adapterList = new AdapterList(carsList, this);
@@ -66,9 +70,14 @@ public class MyAnnouncesActivity extends AppCompatActivity implements CarCallbac
             @Override
             public void onResponse(Call<List<AnnoucedCars>> call, Response<List<AnnoucedCars>> response) {
                 carsList = response.body();
-                adapterList.setAnnoucedCarsList(carsList);
-                adapterList.notifyDataSetChanged();
-                recyclerView.setAdapter(adapterList);
+                if (carsList != null) {
+                    adapterList.setAnnoucedCarsList(carsList);
+                    adapterList.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapterList);
+                } else {
+                    tvMyAnnounces.setTextSize(20);
+                    tvMyAnnounces.setText("Vous n'avez pas d'annonces!");
+                }
             }
 
             @Override

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AnnounceDetailsActivity">
+
+    <ImageView
+        android:id="@+id/ivCarInfos"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="@drawable/container_bg"
+        android:backgroundTint="#FDEBD0"
+        android:transitionName="containerTN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/details_car_image"
+        android:layout_width="176dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="centerCrop"
+        android:transitionName="carTN"
+        app:layout_constraintStart_toStartOf="@+id/ivCarInfos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/default_car" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="12dp"
+        android:drawableStart="@drawable/ic_outline_title_24"
+        android:maxLines="2"
+        android:text="Title of the announce"
+        android:textStyle="bold"
+        android:transitionName="carTitleTN"
+        app:layout_constraintEnd_toEndOf="@+id/ivCarInfos"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toTopOf="@+id/ivCarInfos" />
+
+    <TextView
+        android:id="@+id/tvBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_directions_car_24"
+        android:text="@string/brand"
+        android:transitionName="carBrandTN"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvCarName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_directions_car_24"
+        android:text="@string/carname"
+        android:transitionName="carNameTN"
+        app:layout_constraintStart_toEndOf="@+id/tvBrand"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvSeatCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_people_24"
+        android:text="@string/seat_count"
+        android:transitionName="carSeatCoutTN"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_outline_attach_money_24"
+        android:text="@string/price"
+        android:transitionName="carPriceTN"
+        app:layout_constraintStart_toEndOf="@+id/tvSeatCount"
+        app:layout_constraintTop_toBottomOf="@+id/tvCarName" />
+
+    <TextView
+        android:id="@+id/tvTownRent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_baseline_location_on_24"
+        android:text="@string/town"
+        android:transitionName="carTownTN"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:lineSpacingExtra="8dp"
+        android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_sed_do_eiusmod_tempor_incididunt_ut_labore_et_dolore_magna_aliqua_ut_enim_ad_minim_veniam_quis_nostrud_exercitation_ullamco_laboris_nisi_ut_aliquip_ex_ea_commodo_consequat_duis_aute_irure_dolor_in_reprehenderit_in_voluptate_velit_esse_cillum_dolore_eu_fugiat_nulla_pariatur_excepteur_sint_occaecat_cupidatat_non_proident_sunt_in_culpa_qui_officia_deserunt_mollit_anim_id_est_laborum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCarInfos" />
+
+    <Button
+        android:id="@+id/btnCancelRent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_weight="1"
+        android:backgroundTint="#ff690f"
+        android:drawableTint="#ff690f"
+        android:padding="20dp"
+        android:text="Annuler la location"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:layout_constraintVertical_bias="0.88" />
+
+    <TextView
+        android:id="@+id/tvCategory"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_baseline_category_24"
+        android:text="Catégorie"
+        android:transitionName="carCategTN"
+        app:layout_constraintStart_toEndOf="@+id/details_car_image"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeatCount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
