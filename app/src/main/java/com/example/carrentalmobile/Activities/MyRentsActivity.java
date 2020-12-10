@@ -1,5 +1,6 @@
 package com.example.carrentalmobile.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
@@ -40,6 +41,7 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
     List<AnnoucedCars> carsList;
     Context context;
     TextView tvMyRents;
+    int indexCarReturned;
 
     MenuItem menuAdd, menuHome;
 
@@ -125,28 +127,42 @@ public class MyRentsActivity extends AppCompatActivity implements CarCallback {
         Pair<View, String> p9 = Pair.create(town, "carCategTN");
 
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-        startActivityForResult(intent, 100, optionsCompat.toBundle());
+        startActivityForResult(intent, 1221, optionsCompat.toBundle());
     }
 
     @Override
     public void onCarLongPressClick(int pos) {
-            new AlertDialog.Builder(context).setTitle("Annuler une location")
-                    .setMessage("Voulez-vous vraiement annuler la location?")
-                    .setPositiveButton("Oui", (dialog, which) -> {
-                        Api server = RetroFitInstance.getInstance().create((Api.class));
-                        Call<ResponseBody> call = server.cancelRent(carsList.get(pos).getIdannounce());
-                        call.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                carsList.remove(pos);
-                                adapterList.notifyItemRemoved(pos);
-                            }
+        new AlertDialog.Builder(context).setTitle("Annuler une location")
+                .setMessage("Voulez-vous vraiement annuler la location?")
+                .setPositiveButton("Oui", (dialog, which) -> {
+                    Api server = RetroFitInstance.getInstance().create((Api.class));
+                    Call<ResponseBody> call = server.cancelRent(carsList.get(pos).getIdannounce());
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            indexCarReturned = pos;
+                            carsList.remove(pos);
+                            adapterList.notifyItemRemoved(pos);
+                        }
 
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                            }
-                        });
-                    }).setNegativeButton("Non", null).setIcon(android.R.drawable.ic_menu_delete).show();
+                        }
+                    });
+                }).setNegativeButton("Non", null).setIcon(android.R.drawable.ic_menu_delete).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1221 && resultCode == RESULT_OK && carsList != null) {
+            carsList.remove(indexCarReturned);
+            adapterList.notifyItemRemoved(indexCarReturned);
+            if (carsList.isEmpty()) {
+                tvMyRents.setTextSize(20);
+                tvMyRents.setText("Vous n'avez pas de locations!");
+            }
+        }
     }
 }

@@ -69,6 +69,7 @@ public class MyRentDetailsActivity extends AppCompatActivity {
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                setResult(RESULT_OK, new Intent());
                                 finish();
                             }
 
