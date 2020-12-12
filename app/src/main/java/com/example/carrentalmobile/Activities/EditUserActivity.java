@@ -99,12 +99,11 @@ public class EditUserActivity extends AppCompatActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Veuillez patienter");
                 progressDialog.show();
-                Call<ResponseBody> call = serveur.editUser(
+                Call<ResponseBody> call = serveur.editUser(connectedUserId+"",
                         etFirstname.getText().toString(),
                         etLastname.getText().toString(),
                         etPhone.getText().toString(),
                         etEmail.getText().toString(),
-                        etPassword.getText().toString(),
                         etUsername.getText().toString());
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
