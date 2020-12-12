@@ -93,11 +93,11 @@ public interface Api {
     @POST("Php/EditUser.php")
     @FormUrlEncoded
     Call<ResponseBody> editUser(
+            @Field("iduser") String iduser,
             @Field("firstname") String firstname,
             @Field("lastname") String lastname,
             @Field("phonenumber") String phonenumber,
             @Field("email") String email,
-            @Field("password") String password,
             @Field("username") String username
     );
 
@@ -108,7 +108,7 @@ public interface Api {
 
     //todo
     @GET("Php/GetUserInfo.php")
-    Call<List<AnnoucedCars>> getUserInfo(
+    Call<User> getUserInfo(
             @Query("iduser") String iduser
     );
 

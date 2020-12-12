@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,8 +29,11 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
 
     TextView carName, title, numberPlace, pricePerDay, location, brand, description, category;
     ImageView imageViewCar;
+    MenuItem menuAdd, menuProfile, menuHome;
     AnnoucedCars details;
     Button btnRent;
+    SharedPreferences sharedPreferences;
+    int connectedUserId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,6 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Intent intentReturn = new Intent();
                             intentReturn.putExtra("rented", true);
-
                             setResult(RESULT_OK, intentReturn);
                             finish();
                         }
@@ -91,7 +94,44 @@ public class AnnounceDetailsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.burger_menu, menu);
+        menuAdd = menu.findItem(R.id.menuAdd);
+        menuProfile = menu.findItem(R.id.menuProfile);
+        menuHome = menu.findItem(R.id.menuHome);
+
+        menuAdd.setOnMenuItemClickListener(item -> {
+            if (isConnected()) {
+                Intent intent = new Intent(getBaseContext(), AddAnnounceActivity.class);
+                startActivityForResult(intent, 555);
+            } else {
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivityForResult(intent, 444);
+            }
+            return false;
+        });
+
+        menuProfile.setOnMenuItemClickListener(menuItem -> {
+            if (!isConnected()) {
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivityForResult(intent, 777);
+            } else {
+                Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
+                startActivityForResult(intent, 888);
+            }
+            return false;
+        });
+
+        menuHome.setOnMenuItemClickListener(menuItem -> {
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            return false;
+        });
         return true;
+    }
+
+    private boolean isConnected() {
+        sharedPreferences = getSharedPreferences("stayConnected", MODE_PRIVATE);
+        connectedUserId = sharedPreferences.getInt("userId", 0);
+        return connectedUserId > 0;
     }
 
     private void loadAnnounceData(AnnoucedCars annoucedCars) {

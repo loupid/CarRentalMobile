@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     Context context;
 
-    MenuItem menuAdd, menuProfile;
+    MenuItem menuHome, menuProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,12 +129,12 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.burger_menu, menu);
-        menuAdd = menu.findItem(R.id.menuAdd);
+        menuHome = menu.findItem(R.id.menuHome);
         menuProfile = menu.findItem(R.id.menuProfile);
 
-        menuAdd.setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(context, AddAnnounceActivity.class);
-            startActivityForResult(intent, 11);
+        menuHome.setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
             return false;
         });
 

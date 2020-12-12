@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
     android:layout_weight="3">
 
     <LinearLayout
@@ -123,54 +124,8 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="100dp" />
 
-        <EditText
-            android:id="@+id/etEditPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#ff690f"
-            android:drawableStart="@drawable/ic_baseline_vpn_key_24"
-            android:drawableTint="#ff690f"
-            android:ems="10"
-            android:foregroundTint="#ff690f"
-            android:hint="Mot de passe"
-            android:inputType="textPassword"
-            android:padding="20dp"
-            android:text="12345"
-            android:textSize="20sp"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="411dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="150dp" />
-
-        <EditText
-            android:id="@+id/etEditConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#ff690f"
-            android:drawableStart="@drawable/ic_baseline_vpn_key_24"
-            android:drawableTint="#ff690f"
-            android:ems="10"
-            android:foregroundTint="#ff690f"
-            android:gravity="start|top"
-            android:hint="Confirmer le mot de passe"
-            android:inputType="textPassword"
-            android:padding="20dp"
-            android:singleLine="false"
-            android:text="12345"
-            android:textSize="20sp"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="411dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="50dp" />
-
         <Button
-            android:id="@+id/btnEdit"
+            android:id="@+id/btnEditUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
